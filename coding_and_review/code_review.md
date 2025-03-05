@@ -11,7 +11,7 @@
 - A **common practice** in any organization engaged in code development
 - It is **a must in collaborative coding** and very useful for general coding and coding *as service* (sort of our case quite often)​
 - It works hand in hand with the [Best Coding Practices](./best_coding_practices.md), [Code Testing](./code_testing.md), [Code Reproducibility](./code_reproducibility.md) and [GitHub Best Practices](./github_best_practices.md)
-    - It can be supported by a set [GitHub Setup and Rules](./TODO_github_setup.md)
+    - It can be supported by a set [GitHub Setup and Rules](coding_and_review/TODO_github_setup.md)
 - Results in **comprehensive, readable, functional, and tested code** written according to the agreed best practices
 - Code Review benefits are nicely summarized [here](https://www.devart.com/review-assistant/learnmore/benefits.html) and [here](https://www.browserstack.com/guide/code-review-benefits)
 - In practice, a **Developer** writes code and when they finish a particular *feature*, they request a second person (**Reviewer**) to check the code, see if it works as intended and follows the agreed best practices. Therefore, both the Developer and the Reviewer are responsible for the final code quality.

@@ -11,7 +11,7 @@
     - This makes your code faster to read and easier to modify for both the future you and everyone else
 - Use **functions** wherever possible and reuse them
     - They lower the chance of making a typo error when reusing the code in multiple sections
-	- Functions are not only about code repetition - functions can be [Unit Tested](./code_testing.md#unit-tests)
+   	- Functions are not only about code repetition - functions can be [Unit Tested](./code_testing.md#unit-tests)
 - Use **configs** wherever possible
     - Try to avoid settings parameters and variables, especially the repeating ones, directly in the scripts
     - For example, you can use `YAML`-based config files and parse them [`yq`](https://github.com/mikefarah/yq) inside your shell scripts (see an [example](#parsing-config-files-with-yq) below)
@@ -32,7 +32,7 @@
 - **Develop in branches** and use Pull Request (Merge Request) to *publish* the code (see [GitHub Best Practices](github_best_practices.md) and [Code Review](./code_review.md))
 - Try to follow the Clean Code idea as much as possible (partially covered in other sections as well):
     - [Clean Code for beginners](https://www.freecodecamp.org/news/clean-coding-for-beginners/) and [Clean Code book summary](<https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29>)
-	    - The actual (for a lot more information) [Clean Code book](https://github.com/jnguyen095/clean-code/blob/master/Clean.Code.A.Handbook.of.Agile.Software.Craftsmanship.pdf)
+   	    - The actual (for a lot more information) [Clean Code book](https://github.com/jnguyen095/clean-code/blob/master/Clean.Code.A.Handbook.of.Agile.Software.Craftsmanship.pdf)
 
 ## Naming Conventions (functions, variables, scripts)
 
@@ -55,11 +55,12 @@
 
 ### Shell
 
-- [Shell code styling practices from Google](https://google.github.io/styleguide/shellguide.html)​
+- [Shell code styling practices from Google](https://google.github.io/styleguide/shellguide.html)
+   	- Note: Google has​ other styleguides and best coding practices recommendation for many other [languages](https://google.github.io/styleguide/)
 - Additional best practices [here](https://medium.com/codecuriosity/shell-script-best-practices-048696404b3a) (PDF version [here](./examples/Shell_Script_Best_Practices_Neuro_Bytes_CodeCuriosity_Oct,_2024_Medium.pdf))
 - Another nice (and short) summary [here](https://bertvv.github.io/cheat-sheets/Bash.html)​
 - Set `set -ueo pipefail` on the top of your bash scripts to capture unset variables, error codes, etc.
-	- Description of the used flags [here](https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425#file-bash_strict_mode-md)
+   	- Description of the used flags [here](https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425#file-bash_strict_mode-md)
 - Quote variables to prevent word-splitting
 - Don't put passwords and
 - Use `#!/bin/bash -x` or `#!/bin/bash -v` for debugging

@@ -14,7 +14,7 @@ The documentation describes:
 - [Code Review](./code_review.md): explains the process and best practices for Code Review.
 - [Code Testing](./code_testing.md): covers the methods and tools for code testing.
 - [GitHub Best Practices](./github_best_practices.md): offers guidelines for using GitHub effectively and efficiently. It primarily focuses on structuring tasks, commits, and pull requests. Contains some guidelines for `git` best practices.
-- [WiP - GitHub setup](./TODO_github_setup.md): provides instructions on setting up GitHub for your projects and repositories, including initial configuration and settings.
+- [WiP - GitHub setup](coding_and_review/TODO_github_setup.md): provides instructions on setting up GitHub for your projects and repositories, including initial configuration and settings.
 - [WiP - Tips and tricks](./TODO_tips_and_tricks.md): shares tips and tricks to help with coding, Code Review and development workflow overall, simplified checklists, etc.
 
 ## Glossary

@@ -29,14 +29,14 @@
 - Record the status of the *actual* development environment as part of the output/environment files:
     - R: `sessionInfo()` (at the end of the R script) save the list of loaded packages and their versions
     - `conda`: `conda env export --no-builds > environment.yml` to export all the installed software versions including automatically installed dependencies or `conda env export --from-history > environment.yml` to export only *manually* installed software versions
-	    - Note: `conda`: `conda env export > environment.yml` to export **detailed** software version including builds in the current `conda` environment
+        - Note: `conda`: `conda env export > environment.yml` to export **detailed** software version including builds in the current `conda` environment
 
 ## Docker, Apptainer, Singularity Images
 
 - Currently, the most common containerization tools are Docker and Apptainer (ex Singularity)
 - For full (almost) reproducibility, the **complete** development environment should be defined in `Dockerfile`/`.def` files with instructions on how to build the image
 - Running containers has to be supported by the infrastructure, which is often the biggest issue on locally hosted servers
-    - For example, [Rootless mode for Docker](https://docs.docker.com/engine/security/rootless/), [podman](https://podman.io/), or [Fakeroot for Apptainer](https://apptainer.org/docs/user/main/fakeroot.html)
+    - For example, [buildah](https://github.com/containers/buildah), [podman](https://podman.io/), [charliecloud](https://hpc.github.io/charliecloud/index.html), [kaniko](https://github.com/GoogleContainerTools/kaniko), [Fakeroot for Apptainer](https://apptainer.org/docs/user/main/fakeroot.html), or [Rootless mode for Docker](https://docs.docker.com/engine/security/rootless/) (not recommended)
 - On systems supporting Docker/Apptainer images, we might encounter container/image management problems
     - Both Docker and Apptainer tend to keep many temporary, dangling images, unused containers, cache files, etc, causing storage space issues
     - Note: [kubernetes](https://kubernetes.io/) is the industry standard for large-scale container management that can handle a lot of management issues
@@ -194,17 +194,17 @@ conda config --set channel_priority strict
 ## R
 
 - Consider using [`{renv}`](https://rstudio.github.io/renv/articles/renv.html) for independent reproducible R software environments
-	- For example, you can have a single standardized R docker image with `{renv}`, install and track	packages with `{renv}` for each project. Once the project is done and you need to preserve the software versions, you can create a separate docker image with all the software preinstalled
-	- Note: Not all R packages are always preserved and sometimes they are even removed from CRAN/Bioconductor - only using `{renv}` is **not enough** for future reproducibility
-	- Alternative to `{renv}` is [`{groundhog}`](https://groundhogr.com/)
-		- *tldr; academics should probably use groundhog, corporate data scientists should arguably use renv.*
-		- Full comparison of `{renv}` and `{grounhog}` [here](https://groundhogr.com/renv/) 
+    - For example, you can have a single standardized R docker image with `{renv}`, install and track packages with `{renv}` for each project. Once the project is done and you need to preserve the software versions, you can create a separate docker image with all the software preinstalled
+    - Note: Not all R packages are always preserved and sometimes they are even removed from CRAN/Bioconductor - only using `{renv}` is **not enough** for future reproducibility
+    - Alternative to `{renv}` is [`{groundhog}`](https://groundhogr.com/)
+        - *tldr; academics should probably use groundhog, corporate data scientists should arguably use renv.*
+        - Full comparison of `{renv}` and `{grounhog}` [here](https://groundhogr.com/renv/)
 - Consider using [`{usethis}`](https://usethis.r-lib.org/index.html) for automatization of repetitive tasks and project setup
-	- `{usethis}` automates repetitive tasks that arise during project setup and development, both for R packages and non-package projects
+    - `{usethis}` automates repetitive tasks that arise during project setup and development, both for R packages and non-package projects
 - You should also use *classic* `sessionInfo()` to report the currently loaded packages
-	- `sessionInfo() |> report::report()`
+    - `sessionInfo() |> report::report()`
 - For RStudio users - use [`.Rproj`](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects) files and combine it with [`{here}`](https://here.r-lib.org/) package
-	- This make your *analysis* directory into *project* directory for better path tracking and setting
+    - This make your *analysis* directory into *project* directory for better path tracking and setting
 - Nice summary of reproducible R development [Building reproducible analytical pipelines with R](https://raps-with-r.dev/)
 
 ## Workflow Managers
