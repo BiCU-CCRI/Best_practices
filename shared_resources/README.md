@@ -2,6 +2,9 @@
 
 Definition of structure and location of shared resources at the cluster(s). Primarily focused on newly established shared resources at the CeMM cluster but can be applied anywhere.
 
+- `README.md`: information (verbal) about the references, images, subdirectories, ... Used to describe the resources and can be stored in `git`.
+- `run.sh`: information to reproduce the references, images, subdirectories, ... Contains information to *rebuild* the resources if necessary and can be stored in `git`.
+
 ## References
 
 - **Source link** of the references should be included in the `run.sh` or `README.md`, including all the postprocessing steps if applicable
@@ -142,3 +145,6 @@ Proposed directory for shared Apptainer/Singularity images:
     - Also available on [Dockerhub](https://hub.docker.com/u/biocontainers)
 - [Galaxy project](https://depot.galaxyproject.org/singularity/) - Prebuilt images
 - [Dockerhub](https://hub.docker.com/search) - *general* Docker images hub
+- [Sylab](https://cloud.sylabs.io/library) - general Singularity images hub
+- [Singularity hub](https://singularityhub.github.io/) - general Singularity images info
+
