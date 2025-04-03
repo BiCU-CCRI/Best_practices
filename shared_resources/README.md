@@ -7,7 +7,7 @@ Definition of structure and location of shared resources at the cluster(s). Prim
 
 ## References
 
-- **Source link** of the references should be included in the `run.sh` or `README.md`, including all the postprocessing steps if applicable
+- **Source link** of the references should be included in the `run.sh` or `README.md` including all the postprocessing steps if applicable
 - **Steps to obtain the reference** if **not possible** to include the **link** should be included in the `run.sh` or `README.md` (for example, some UCSC  Genome Browser references)
     - Note: If you are copying the reference from the CCRI storage, include the original location and the date when you copied the reference (for example, *Copied from Isilion on Jan 02, 2024: `/home/jan_o/bioinf_isilon/core_bioinformatics_unit/Public/references/Human_GRCh38_v102/Homo_sapiens_GRCh38_v102_star_index_150bp` -> `STAR_2.7.10a/index_150bp`*)
 - Downloading of the reference should **include the download date** `Downloaded on...`
@@ -22,7 +22,7 @@ Definition of structure and location of shared resources at the cluster(s). Prim
 - **Parameters** used to construct the reference should be included **in the reference name** (for example, `human/GRCh38/ensembl_v102/STAR_v2.7.10a/index_150bp`)
 - **Use Latin names** for organisms where possible
     - If you want to use *common* names, softlink them from Latin names (for example, `ln -s Homo_sapiens human`)
-- Create a **subdirectory** if your reference is very **pipeline-/analysis-specific** and it doesn't have a *common* use for other users
+- Only create **subdirectories** if your reference is **very pipeline-/analysis-specific** and it doesn't have any use for other users
 
 ### Directory structure
 
@@ -104,8 +104,8 @@ TODO
 - **Do not build images** from **scratch** if they are **already available** in one of the hubs or already exist in the shared resources
     - Design your workflow/analysis so it uses a single image per step, preferably **single-tool images**
     - If you have to build a **custom image**, use `apptainer` and **install the tool(s) using `conda`** (doesn't require root privileges as compared to `apt-get`)
-    - For more info on where to get pre-built images, see [Publicly available images](#publicly-available-images) section
-- **Include `.def` and `.dockerfile`** files for custom images
+    - For more info on where to get prebuilt images, see [Publicly available images](#publicly-available-images) section
+- **Include `.def` and `.Dockerfile`** files for custom images
 - **Include instructions** on how to **build** the image, **including the version of the tool** (docker/apptainer/singularity) used to build the image
 - Include the **download source link** if you didn't build the container yourself
     - Note: If you are copying the image from the CCRI storage, include the original location and the date when you copied the image (for example, *Copied from Isilion on Jan 02, 2024: `/home/jan_o/bioinf_isilon/core_bioinformatics_unit/Public/singularity_images/minimap2_v2.17.sif` -> `minimap2_v2.17.sif`*)
@@ -114,6 +114,7 @@ TODO
     - Note: Singularity Image Format is the default format since Singularity 3.0+
 - Using **`sha256` digest** (or `git` hash) method is **preferred over tag method**
     - For more info see [Best_practices/coding_and_review/code_reproducibility](https://github.com/BiCU-CCRI/Best_practices/blob/15-best-coding-practices-and-code-review/coding_and_review/code_reproducibility.md#base-image)
+- Only create **subdirectories** if your images are **very pipeline-/analysis-specific** and don't have any use for other users, or would clash with other already existing images (for example, very similar name)
 
 ### Directory structure
 
@@ -147,4 +148,3 @@ Proposed directory for shared Apptainer/Singularity images:
 - [Dockerhub](https://hub.docker.com/search) - *general* Docker images hub
 - [Sylab](https://cloud.sylabs.io/library) - general Singularity images hub
 - [Singularity hub](https://singularityhub.github.io/) - general Singularity images info
-
