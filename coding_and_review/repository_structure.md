@@ -35,7 +35,6 @@
         - **`envs/docker`**
 - **`examples`** - example data and/or outputs of the analysis. This can be included in `tests`.
 - **`logs`** - log files and technical reports from the analysis. These reports can also be included in `results/logs`
-- **`metadata`** - metadata for the analysis; samples description, groups, samples to raw data links, etc
 - **`notebooks`** - Jupyter or RMarkdown notebooks for exploratory data analysis and prototyping.
 - **`publication`** - materials, results, visualization scripts for the plots, and text for the publication results; this can also include a copy of the final publication.
 - **`reports`** - summary reports summarizing the analysis results. These reports can also be included in `results/reports`.
@@ -48,7 +47,7 @@
    	- `run/run_check.sh` - check the code with input files before running the analysis (`--dry-run`).
    	- `run/run_analysis.sh` - run the analysis.
    	- `run/run_create_report.sh` - create report from the analysis.
-- **`run.sh`** - the main script to run the whole analysis, calling individual scripts from the `run` directory (e.g., get data, prepare environments, run analysis, make reports)
+- **`run.sh`** - the main script to run the whole analysis, calling individual scripts from the `run` directory (e.g., get data, prepare environments, run analysis, make reports); There could be additional `run_xx.sh` scripts in the project root directory such as `run_lint.sh` or `run_check.sh` but it should be kept to a minimum
 - **`src`** - scripts for individual analysis steps. Workflow-specific scripts can be also placed within `workflow` directory(ies) if the project is based on workflows.
     - **`src/environment`** - instructions on how to build environments (`conda`, `docker`/`apptainer` images, ...)
     - **`src/bash`** - bash scripts
