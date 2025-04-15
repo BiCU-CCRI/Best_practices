@@ -11,7 +11,7 @@
     - This makes your code faster to read and easier to modify for both the future you and everyone else
 - Use **functions** wherever possible and reuse them
     - They lower the chance of making a typo error when reusing the code in multiple sections
-   	- Functions are not only about code repetition - functions can be [Unit Tested](./code_testing.md#unit-tests)
+    - Functions are not only about code repetition - functions can be [Unit Tested](./code_testing.md#unit-tests)
 - Use **configs** wherever possible
     - Try to avoid settings parameters and variables, especially the repeating ones, directly in the scripts
     - For example, you can use `YAML`-based config files and parse them [`yq`](https://github.com/mikefarah/yq) inside your shell scripts (see an [example](#parsing-config-files-with-yq) below)
@@ -32,7 +32,7 @@
 - **Develop in branches** and use Pull Request (Merge Request) to *publish* the code (see [GitHub Best Practices](github_best_practices.md) and [Code Review](./code_review.md))
 - Try to follow the Clean Code idea as much as possible (partially covered in other sections as well):
     - [Clean Code for beginners](https://www.freecodecamp.org/news/clean-coding-for-beginners/) and [Clean Code book summary](<https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29>)
-   	    - The actual (for a lot more information) [Clean Code book](https://github.com/jnguyen095/clean-code/blob/master/Clean.Code.A.Handbook.of.Agile.Software.Craftsmanship.pdf)
+        - The actual (for a lot more information) [Clean Code book](https://github.com/jnguyen095/clean-code/blob/master/Clean.Code.A.Handbook.of.Agile.Software.Craftsmanship.pdf)
 
 ## Naming Conventions (functions, variables, scripts)
 
@@ -56,11 +56,11 @@
 ### Shell
 
 - [Shell code styling practices from Google](https://google.github.io/styleguide/shellguide.html)
-   	- Note: Google has​ other styleguides and best coding practices recommendation for many other [languages](https://google.github.io/styleguide/)
+    - Note: Google has​ other styleguides and best coding practices recommendation for many other [languages](https://google.github.io/styleguide/)
 - Additional best practices [here](https://medium.com/codecuriosity/shell-script-best-practices-048696404b3a) (PDF version [here](./examples/Shell_Script_Best_Practices_Neuro_Bytes_CodeCuriosity_Oct,_2024_Medium.pdf))
 - Another nice (and short) summary [here](https://bertvv.github.io/cheat-sheets/Bash.html)​
 - Set `set -ueo pipefail` on the top of your bash scripts to capture unset variables, error codes, etc.
-   	- Description of the used flags [here](https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425#file-bash_strict_mode-md)
+    - Description of the used flags [here](https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425#file-bash_strict_mode-md)
 - Quote variables to prevent word-splitting
 - Don't put passwords and
 - Use `#!/bin/bash -x` or `#!/bin/bash -v` for debugging
@@ -74,7 +74,7 @@
 ### Python
 
 - We follow [PEP 8 code formatting](https://peps.python.org/pep-0008/) - widely accepted and the industry standard
-    - Note: `black` with `isort` we use for code styling (see below) follow [PEP 8 formatting](https://github.com/psf/black?tab=readme-ov-file#the-black-code-style) (see code formatting below)
+    - Note: `black` with `isort` we use for code styling follow [PEP 8 formatting](https://github.com/psf/black?tab=readme-ov-file#the-black-code-style) (see [Code Editors Formatters](#code-editors-formatters))
 
 ### Markdown
 
@@ -119,16 +119,21 @@
 ##### RStudio Formatters
 
 - RStudio offers some code stylers as well:
-    - R: [{styler}](https://styler.r-lib.org/index.html)
+    - R: [`air`](https://github.com/posit-dev/air)
+        - Atm, `air` has to be installed as an [external formatter](https://posit-dev.github.io/air/editor-rstudio.html) in RStudio but it's much faster than `{styler}`
+        - It also follows the `tidyverse` styling guide (with minor deviations)
+        - Note: It can be also used from a command line and setting up git pre-commit hooks is much easier than `{styler}`
+    - R: {[`styler`](https://styler.r-lib.org/index.html)}
         - Assign a keyboard shortcut in RStudio and use it before a commit
         - Alternatively, `{styler}` can be included in [git pre-commit hook](#git-pre-commit-hooks-for-code-formatting-and-linting) using [{precommit}](https://github.com/lorenzwalthert/precommit) package
 
 #### Command-line Formatters
 
 - Some of the code formatters can be used from the command line, or as part of the git pre-commit hooks:
-    - Python: `isort` and `black`
-    - `snakemake`: [`snakefmt`](https://github.com/snakemake/snakefmt)
-    - `nextflow`; [`prettier`](https://prettier.io/); more information [here](https://nf-co.re/docs/contributing/code_editors_and_styling/code_formatting#prettier)
+    - Python: [`isort`](https://pypi.org/project/isort/) and [`black`](https://pypi.org/project/black/)
+    - R: [`air`](https://github.com/posit-dev/air)
+    - snakemake: [`snakefmt`](https://github.com/snakemake/snakefmt)
+    - nextflow: doesn't have a dedicated code formatter but recommends using [*standard* ones](https://nf-co.re/docs/contributing/code_editors_and_styling/code_formatting) ; [here](https://nf-co.re/docs/guidelines/documentation/writing_style) is a summary of recommended code styling for `nextflow`
 
 ### Code Linters
 
@@ -175,7 +180,9 @@ yq eval '.name' config.yaml
 
 ### Python Code Formatting `git pre-commit` Hook
 
-To autoformat Python code before `git commit`, you can do the following:
+The following git pre-commit hooks will run `isort`+`black` automatically **for all the Python scripts in the repository** before `git commit`. It is executed centrally for all the git repos. You can still set your local git repo hooks separately and it will run both of them.
+
+To autoformat Python code **before** `git commit`, you can do the following:
 
 1. Install `isort` and `black`
 
@@ -183,11 +190,14 @@ To autoformat Python code before `git commit`, you can do the following:
 pip3 install isort black
 ```
 
+You can also install it on your base `conda` environment
+
 2. Save the following code into  `~/.git/hooks/pre-commit` file + add execution permissions `chmod +x ~/.git/hooks/pre-commit`.
 
 ```shell
-#!/usr/bin/bash
+#!/bin/bash
 
+# This section ensures your locally set pre-commit hooks are executed as well
 if test -e ./.git/hooks/pre-commit; then
     bash ./.git/hooks/pre-commit
 fi
@@ -205,7 +215,41 @@ wait
     hooksPath = /home/<USERNAME>/.git/hooks
 ```
 
-- This will run `isort`+`black` automatically for all the Python scripts before `git commit`
+Or by:
+
+```shell
+git config --global core.hooksPath /home/<USERNAME>/.git/hooks
+```
+
+### R Code Formatting `git pre-commit` Hook
+
+The following git pre-commit hooks will run [`air`](https://github.com/posit-dev/air) automatically **only for git staged R scripts** before `git commit`.
+
+To autoformat R code **before** `git commit`, you can put the following into your `~/.git/hooks/pre-commit` (for more info on how to set up the hooks see the [Python Code Formatting `git pre-commit` Hook](#python-code-formatting-git-pre-commit-hook)):
+
+```bash
+#!/bin/bash  
+
+if test -e ./.git/hooks/pre-commit; then
+    bash ./.git/hooks/pre-commit
+fi
+  
+# Find all staged .R and .r files (before committing)  
+FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -e '\.R$' -e '\.r$')  
+  
+# If no matching files are staged, exit  
+[ -z "$FILES" ] && exit 0  
+  
+function formatr() {  
+  air format --no-color $1  
+}  
+  
+for file in $FILES; do  
+    formatr "$file"  
+    # If function modifies the file, re-add it to staging  
+    git add "$file"  
+done
+```
 
 ### `shell` Code Formatting Upon Save
 
