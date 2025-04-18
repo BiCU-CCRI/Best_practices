@@ -5,7 +5,7 @@ Structure and recommendations for shared resources at the cluster(s). Primarily 
 - `run.sh`: information on where to get the references (databases, images, etc.) from and how to build them. It contains information to *rebuild* the resources if necessary and can be stored on `GitHub`. This is the most critical resource if we have to build the references from scratch or share them externally.
 - `README.md`: information (verbal) about the references (databases, images, etc.). Used to describe the resources and can be stored on `GitHub`. For example, it can contain information about why a particular reference was chosen over another, the differences, which reference to use as the *default*, etc.
 
-Shared resources at the CeMM cluster are located under `/nobackup/lab_ccri_bicu/public`.
+Shared resources at the CeMM cluster are at `/nobackup/lab_ccri_bicu/public`.
 
 ## References
 
@@ -39,38 +39,36 @@ Shared resources at the CeMM cluster are located under `/nobackup/lab_ccri_bicu/
 
 ```shell
 references
-└── genome
-    └── Homo_sapiens
-        └── GRCh38
-            └── Ensembl
-                └── v102
-                    ├── README.md
-                    ├── STAR
-                    │   └── v2.7.10a
-                    │       ├── index_100bp
-                    │       ├── index_150bp
-                    │       └── index_50bp
-                    ├── genes.gtf -> Homo_sapiens.GRCh38.102.gtf
-                    ├── genome.fa -> Homo_sapiens.GRCh38.dna.toplevel.fa
-                    ├── Homo_sapiens.GRCh38.102.gtf
-                    ├── Homo_sapiens.GRCh38.dna.toplevel.fa
-                    └── run.sh
+└── Homo_sapiens
+    └── GRCh38
+        └── Ensembl
+            └── v102
+                ├── README.md
+                ├── STAR
+                │   └── v2.7.10a
+                │       ├── index_100bp
+                │       ├── index_150bp
+                │       └── index_50bp
+                ├── genes.gtf -> Homo_sapiens.GRCh38.102.gtf
+                ├── genome.fa -> Homo_sapiens.GRCh38.dna.toplevel.fa
+                ├── Homo_sapiens.GRCh38.102.gtf
+                ├── Homo_sapiens.GRCh38.dna.toplevel.fa
+                └── run.sh
 ```
 
 #### Directory structure for databases
 
-Copy the structure of the genomic datasets wherever possible
+Copy the structure of the genomic datasets wherever possible.
 
 ```shell
 databases
-└── variants
-    └── Homo_sapiens
-        └── GRCh38
-            └── dbSNP
-                └── b151
-                    ├── All_20180418.vcf.gz
-                    ├── README.md
-                    └── run.sh
+└── Homo_sapiens
+    └── GRCh38
+        └── dbSNP
+            └── b151
+                ├── All_20180418.vcf.gz
+                ├── README.md
+                └── run.sh
 ```
 
 #### Directory structure for other resources
@@ -99,7 +97,7 @@ resources
     - For example, `ucsc-bedclip-377--h0b8a92a_2.sif`
 - **Do not duplicate** images if they are **already exist** in the shared resources
 - **Don't build** an image from scratch if it already exists as **prebuilt image** - see [Publicly available images](#publicly-available-images) section
-- If you have to build a **custom image**, always include the `.def.` (or `.Dockerfile)`) with the image
+- If you have to build a **custom image**, use `ubuntu:22.04` as the base image and always include the `.def.` (or `.Dockerfile)`) with the image
     - apptainer is preferred due to the compatibility with the CeMM cluster environment
 - **Include instructions** on how to **build** the image, **including the tool version** (`apptainer`/`singularity`/`docker`) used to build the image
 - Include the **download source link** if you didn't build the container yourself
@@ -118,8 +116,8 @@ apptainer_images
 ├── bcftools-1.20.def
 ├── bcftools-1.20.sif
 ├── rnaseq_fusion_pipeline
-│   ├── rnaseq_fusion_report_v2.1.5_mitelman_fix_add_tool_cicero.sif
-│   └── rnaseq_fusion_report_v2.1.5_mitelman_fix_add_tool_cicero.Dockerfile
+│   ├── rnaseq_fusion_report-v2.1.5_mitelman_fix_add_tool_cicero.sif
+│   └── rnaseq_fusion_report-v2.1.5_mitelman_fix_add_tool_cicero.Dockerfile
 └── run.sh
 ```
 
@@ -131,4 +129,4 @@ apptainer_images
 - [Galaxy project](https://depot.galaxyproject.org/singularity/) - Prebuilt images
 - [Dockerhub](https://hub.docker.com/search) - *general* Docker images hub
 - [Sylab](https://cloud.sylabs.io/library) - general Singularity images hub
-- [Singularity hub](https://singularityhub.github.io/) - general Singularity images info
+- [Singularity Hub](https://singularityhub.github.io/) - general Singularity images info
