@@ -2,7 +2,7 @@
 
 Structure and recommendations for shared resources at the cluster(s). Primarily focused on newly established shared resources at the CeMM cluster but can be applied anywhere.
 
-- `run.sh`: information on where to get the references (databases, images, etc.) from and how to build them. It contains information to *rebuild* the resources if necessary and can be stored on `GitHub`. This is the most critical resource if we have to build the references from scratch or share them externally.
+- `run.sh`: information on where to get the references (databases, images, etc.) from and how to build them. It contains details on *rebuilding* resources if necessary and can be stored on `GitHub`. This is the most critical resource if we have to build the references from scratch or share them externally.
 - `README.md`: information (verbal) about the references (databases, images, etc.). Used to describe the resources and can be stored on `GitHub`. For example, it can contain information about why a particular reference was chosen over another, the differences, which reference to use as the *default*, etc.
 
 Shared resources at the CeMM cluster are at `/nobackup/lab_ccri_bicu/public`.
@@ -11,11 +11,11 @@ Shared resources at the CeMM cluster are at `/nobackup/lab_ccri_bicu/public`.
 
 - **Source link** of the references must be included in the `run.sh`
 - All the processing instructions to build the reference (if applicable) must be included in the `run.sh`
-- **Steps to obtain the reference** that are **not possible** to be described as a *command* have to be included in the `run.sh` or `README.md` (for example, some UCSC Genome Browser references)
+- **Steps to obtain the reference** that **cannot** to be described as a *command* must be included in the `run.sh` or `README.md` (for example, some UCSC Genome Browser references)
 - Note: If you are copying legacy reference from the CCRI storage, note the original location and the date when you copied the reference
     - For example, *Copied from Isilion on Jan 02, 2024: `/home/jan_o/bioinf_isilon/core_bioinformatics_unit/Public/references/Human_GRCh38_v102/Homo_sapiens_GRCh38_v102_star_index_150bp` -> `./STAR_2.7.10a/index_150bp`*
 - Downloading of a reference should include **the download date**
-    - For example, *`Downloaded on Apr 17, 2025 from https://genome.ucsc.edu/cgi-bin/hgTables`*
+    - For example, *`Downloaded on Apr 17, 2025, from https://genome.ucsc.edu/cgi-bin/hgTables`*
 - It should be possible to identify the specific reference **release** either from the directory structure or from the file name
     - For example, the `Homo_sapiens.GRCh38.dna.toplevel.fa` in `Homo_sapiens/GRCh38/Ensembl/v102/Homo_sapiens.GRCh38.dna.toplevel.fa`
 - It should be possible to identify the specific reference **version** either from the directory structure or from the file name
@@ -26,7 +26,7 @@ Shared resources at the CeMM cluster are at `/nobackup/lab_ccri_bicu/public`.
     - *Generic* reference name makes it easy to switch between versions/organisms
         - For example, `Homo_sapiens/GRCh38/Ensembl/v102/genome.fa` vs. `Mus_musculus/GRCm38/Ensembl/v102/genome.fa`
 - **Steps to construct the reference** (for example, genome index for mapping tool) should included in the `run.sh` or `README.md`, including the used image/tool version
-- **Tool version** used to construct the reference (for example, genome index for mapping tool) should be included **in the reference name** (for example, `Homo_sapiens/GRCh38/Ensembl/v102/STAR/v2.7.10a`)
+- The **tool version** used to construct the reference (for example, genome index for mapping tool) should be included **in the reference name** (for example, `Homo_sapiens/GRCh38/Ensembl/v102/STAR/v2.7.10a`)
 - **Parameters** used to construct the reference that is not set by default should be included **in the reference name**
     - For example, a `STAR` index with `150` read length settings would be `Homo_sapiens/GRCh38/Ensembl/v102/STAR_v2.7.10a/index_150bp`
 - **Use Latin names** for organisms where possible
@@ -96,17 +96,18 @@ resources
 - **Include the tool version** (if single-tool image) and/or image version (preferably `git` commit hash at the time of build) in the **name of the image**
     - For example, `ucsc-bedclip-377--h0b8a92a_2.sif`
 - **Do not duplicate** images if they are **already exist** in the shared resources
-- **Don't build** an image from scratch if it already exists as **prebuilt image** - see [Publicly available images](#publicly-available-images) section
-- If you have to build a **custom image**, use `ubuntu:22.04` as the base image and always include the `.def.` (or `.Dockerfile)`) with the image
-    - apptainer is preferred due to the compatibility with the CeMM cluster environment
+- **Don't build** an image from scratch if it already exists as a **prebuilt image** - see [Publicly available images](#publicly-available-images) section
+- If you must build a **custom image**, use `ubuntu:22.04` as the base image and always include the `.def.` (or `.Dockerfile)`) with the image
+    - `apptainer` is preferred due to the compatibility with the CeMM cluster environment
 - **Include instructions** on how to **build** the image, **including the tool version** (`apptainer`/`singularity`/`docker`) used to build the image
 - Include the **download source link** if you didn't build the container yourself
     - Note: If you are copying the image from the CCRI storage, include the original location and the date when you copied the image (for example, *Copied from Isilion on Jan 02, 2024: `/home/jan_o/bioinf_isilon/core_bioinformatics_unit/Public/singularity_images/minimap2_v2.17.sif` -> `minimap2_v2.17.sif`*)
-- For Apptainer/Singularity images, **use `.sif`** (Singularity Image Format) suffix
+- For Apptainer/Singularity images, use the **`.sif`** (Singularity Image Format) suffix
     - Note: Singularity Image Format is the default format since Singularity 3.0+
-- Using **`sha256` digest** (or `git` hash) method is **preferred over tag method**
+- Using the **`sha256` digest** (or `git` hash) method is **preferred over the tag** method
     - For more info see [Best_practices/coding_and_review/code_reproducibility](https://github.com/BiCU-CCRI/Best_practices/blob/15-best-coding-practices-and-code-review/coding_and_review/code_reproducibility.md#base-image)
 - Create **subdirectories** if your images are **very pipeline-/analysis-specific** and don't have any use for other users or would clash with other already existing images (for example, very similar name)
+- If you need to keep all your images in one subdirectory (for example, you need to mix pipeline-specific images with common images and you don't want to specify separate paths), softlink them from the *main* share directory
 
 ### Directory structure for images
 
