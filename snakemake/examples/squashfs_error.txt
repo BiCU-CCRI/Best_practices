@@ -1,0 +1,67 @@
+FATAL:   while extracting /nobackup/lab_ccri_bicu/public/apptainer_images/rnaseq_fusion_pipeline/rnaseq_arriba_v2.3.0.sif: root filesystem extraction failed: extract command failed: WARNING: passwd file doesn't exist in container, not updating
+WARNING: group file doesn't exist in container, not updating
+WARNING: Skipping mount /etc/hosts [binds]: /etc/hosts doesn't exist in container
+WARNING: Skipping mount /etc/localtime [binds]: /etc/localtime doesn't exist in container
+WARNING: Skipping mount proc [kernel]: /proc doesn't exist in container
+WARNING: Skipping mount /nobackup/lab_ccri_bicu/internal/joppelt/tools/miniforge3-24.3.0-0/envs/snakemake_rnaseq_fusion/var/singularity/mnt/session/tmp [tmp]: /tmp doesn't exist in container
+WARNING: Skipping mount /nobackup/lab_ccri_bicu/internal/joppelt/tools/miniforge3-24.3.0-0/envs/snakemake_rnaseq_fusion/var/singularity/mnt/session/var/tmp [tmp]: /var/tmp doesn't exist in container
+WARNING: Skipping mount /nobackup/lab_ccri_bicu/internal/joppelt/tools/miniforge3-24.3.0-0/envs/snakemake_rnaseq_fusion/var/singularity/mnt/session/etc/resolv.conf [files]: /etc/resolv.conf doesn't exist in container
+Parallel unsquashfs: Using 24 processors
+84293 inodes (61824 blocks) to write
+
+
+[|                                                         ]    563/146117   0%
+[/                                                         ]   2089/146117   1%
+[=\                                                        ]   3338/146117   2%
+[==/                                                       ]   5231/146117   3%
+[==/                                                       ]   6081/146117   4%
+[===|                                                      ]   7864/146117   5%
+[===-                                                      ]   9599/146117   6%
+[====\                                                     ]  10383/146117   7%
+[====/                                                     ]  11963/146117   8%
+[=====\                                                    ]  13511/146117   9%
+[=====/                                                    ]  15230/146117  10%
+[======-                                                   ]  16183/146117  11%
+[=======|                                                  ]  18041/146117  12%
+[=======-                                                  ]  19404/146117  13%
+[========|                                                 ]  20805/146117  14%
+[========-                                                 ]  22251/146117  15%
+[=========/                                                ]  24036/146117  16%
+[=========\                                                ]  25446/146117  17%
+[==========/                                               ]  26739/146117  18%
+[==========\                                               ]  28127/146117  19%
+[===========/                                              ]  29349/146117  20%
+[===========\                                              ]  30760/146117  21%
+[============/                                             ]  32215/146117  22%
+[=============|                                            ]  34298/146117  23%
+[=============/                                            ]  35085/146117  24%
+[==============|                                           ]  36612/146117  25%
+[==============|                                           ]  38091/146117  26%
+[===============\                                          ]  40119/146117  27%
+[================|                                         ]  42299/146117  28%
+[================/                                         ]  43336/146117  29%
+[=================\                                        ]  44509/146117  30%
+[=================|                                        ]  45368/146117  31%
+[==================-                                       ]  47068/146117  32%
+[==================|                                       ]  48410/146117  33%
+[===================-                                      ]  49908/146117  34%
+[====================/                                     ]  51501/146117  35%
+[=====================|                                    ]  54879/146117  37%
+[=====================/                                    ]  55589/146117  38%
+[======================\                                   ]  57211/146117  39%
+[======================/                                   ]  58705/146117  40%
+[=======================\                                  ]  60442/146117  41%
+[========================-                                 ]  61583/146117  42%
+[========================-                                 ]  62913/146117  43%
+[=========================-                                ]  64708/146117  44%
+[==========================\                               ]  68029/146117  46%
+[===========================|                              ]  69358/146117  47%
+[===========================/                              ]  70170/146117  48%
+[============================\                             ]  71781/146117  49%
+[============================-                             ]  73902/146117  50%
+[=============================\                            ]  74739/146117  51%
+[=============================|                            ]  76316/146117  52%
+[==============================-                           ]  77899/146117  53%
+FATAL ERROR: write_file: failed to lstat file /image/root/opt/conda/lib/python3.10/dbm/__init__.py, because Interrupted system call
+: exit status 1
+
