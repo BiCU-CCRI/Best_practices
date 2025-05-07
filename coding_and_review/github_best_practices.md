@@ -333,3 +333,14 @@ closes #14
     - [FigShare](https://figshare.com/)
 - Both provide **DOI to your code** - *freeze* the software code, version and allow citations
     - They also offer direct code import from GitHub (how-to video [Zenodo](https://www.youtube.com/watch?v=HZ6m8oxwvig&ab_channel=LukeDataManager); how-to [FigShare](https://help.figshare.com/article/how-to-connect-figshare-with-your-github-account))
+- Simple Zenodo example:
+
+1) Create tag on GitHub. For example, `v1.0`. You could use also use something like `v1.0_prepub`
+2) Login to Zenodo.com with your GitHub account. You can also use orcid or just create a user account. I find GitHub the easiest since I only upload code. 
+3) Upload the tagged GitHub code to Zenodo. 
+4) Add description if not included by default. For example, **Is supplement to** and add the link your GitHub repo.
+5) Finish
+- If you get any revision requests or you want to update something, you can update your _Zenodo_ repo with the latest code
+- Zenodo then creates two DOIs - one for the _repo_ and one for each uploaded _version_. You can then decide if you want to use the _repo_ DOI or the specific version in your paper. You can upload multiple GitHub tags (versions) and each of the _versions_ will get their own DOI. The main _repo_ DOI stays the same regardless on the version of the code
+- You can also limit the visibility of the code and, for example, restrict it only to certain users (like reviewers or the editor)
+- Once uploaded you cannot edit the code (unless you make a new DOI version) but you can edit the metadata anytime

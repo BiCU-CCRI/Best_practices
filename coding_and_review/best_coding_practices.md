@@ -202,10 +202,31 @@ if test -e ./.git/hooks/pre-commit; then
     bash ./.git/hooks/pre-commit
 fi
 
-isort --sl --profile black . --skip venv/
-black -l 120 . --exclude venv/
-sleep 1
-wait
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+# Source conda unless we have the formatters installed system-wide
+source "${CONDA_PREFIX}/etc/profile.d/conda.sh"
+  
+# Find all staged .py files (before commit)
+python_files=$(git diff --cached --name-only --diff-filter=ACMR "*.py")
+
+# Do NOT quote $python_files here
+if [ -n "$python_files" ]; then
+    if ! command_exists black; then
+        echo "black is not installed, skipping"
+    else
+        black $python_files
+        git add $python_files
+    fi
+    if ! command_exists isort; then
+        echo "isort is not installed, skipping"
+    else
+        isort $python_files
+        git add $python_files
+    fi
+fi
 ```
 
 3. Edit `~/.gitconfig` by adding:
@@ -218,7 +239,7 @@ wait
 Or by:
 
 ```shell
-git config --global core.hooksPath /home/<USERNAME>/.git/hooks
+git config --global core.hooksPath /home/${USER}/.git/hooks
 ```
 
 ### R Code Formatting `git pre-commit` Hook
@@ -230,26 +251,33 @@ To autoformat R code **before** `git commit`, you can put the following into you
 ```bash
 #!/bin/bash  
 
+# This section ensures your locally set pre-commit hooks are executed as well
 if test -e ./.git/hooks/pre-commit; then
     bash ./.git/hooks/pre-commit
 fi
-  
-# Find all staged .R and .r files (before committing)  
-FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -e '\.R$' -e '\.r$')  
-  
-# If no matching files are staged, exit  
-[ -z "$FILES" ] && exit 0  
-  
-function formatr() {  
-  air format --no-color $1  
-}  
-  
-for file in $FILES; do  
-    formatr "$file"  
-    # If function modifies the file, re-add it to staging  
-    git add "$file"  
-done
+
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+# Source conda unless we have the formatters installed system-wide
+source "${CONDA_PREFIX}/etc/profile.d/conda.sh"
+
+# Find all staged .R and .r files (before commit)
+r_files=$(git diff --cached --name-only --diff-filter=ACMR | grep -e '\.R$' -e '\.r$')
+
+# Do NOT quote $r_files here
+if [ -n "$r_files" ]; then
+    if ! command_exists air; then
+        echo "air is not installed, skipping"
+    else
+        air format --no-color $r_files
+        git add $r_files
+    fi
+fi
 ```
+
+Note: If you use `ShellCheck` extension in VS Code, you might have to add `# shellcheck disable=SC2086` above **each** of the lines you don't want to be quoted automatically.
 
 ### `shell` Code Formatting Upon Save
 
