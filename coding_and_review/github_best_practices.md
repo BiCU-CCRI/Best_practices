@@ -256,15 +256,23 @@ closes #14
 
 - PR is initiated by the developer by:
 
- 1. Clink on *Pull requests*  in your repository
- 2. *New pull request*
- 3. Choose the right parent branch to merge to and the branch to be merged on the top left
- 4. *Create pull request*
- 5. Assign yourself as the *Assignee* (to get notifications about changes/comments)
+1. Click on *Pull requests* in your repository
+2. *New pull request*
+3. Choose the right parent branch to merge to and the branch to be merged on the top left
+4. *Create pull request*
+5. Assign yourself as the *Assignee* (to get notifications about changes/comments)
+6. Once done, find your reviewer, assign them in the *Reviewers* section on the top-left, and notify them
+7. Wait for the reviewer to finish their review (described in the [Pull Request Review as a Reviewer](#pull-request-review-as-a-reviewer) section)
+8. Reply/Accept suggestions/Implement changes (don't forget to `git push`)
+9. Click on *Re-request review* in the *Reviewers* section on the top-left (two arrows in a circular shape)
+10. Repeat steps 7-9 as many times as necessary
+11. Merge the PR once all the comments/suggestions are solved and the PR is approved by the reviewer
 
 - Note: I like to create a PR right after the first commit to the new branch and assign myself
     - Because the PR is not ready for review, I mark it as *Draft* (on the top right *Still in progress? Convert to draft*). Once done, you can open the PR and click *Ready for review* to enable the review process
     - This helps me to keep track of all my open PRs
+    - Remove the *Draft* before asking for the review
+- Note: Clicking on *Re-request review* allows the reviewer to submit another review. It also allows them to re-approve the PR in case they pre-approved it and the approval was dismissed
 
 ### Pull Request Review as a Reviewer
 
@@ -280,14 +288,17 @@ closes #14
 5) Go to the line you want to comment on/make a suggestion
 6) Click on the small blue `+` sign (you can select multiple lines by dragging the `+` sign down)
 7) Add a comment or a suggestion (`+/-` sign)
-8) Click on *Start a review* (if it's the first comment/suggestion, otherwise click on *Add review comment/suggestion*)*
-9) Repeat until happy ...
+8) **Important** Click on *Start a review* (if it's the first comment/suggestion, otherwise click on *Add review comment/suggestion*)
+9) Add all your comments/suggestions
 10) Once done, go to the top and click *Finish your review*
 11) You add an overall comment if you like
 12) Select the required follow-up - *Comment/Approve/Request changes*. *Request changes* will probably be the most common option, especially at the beginning of the PR
+13) Wait for the developer to reply/accept suggestions/implement changes (described in the [Pull Request Review as a Developer](#pull-request-review-as-a-reviewer) section)
+14) Repeat steps 1-13 as many times as necessary
+15) Approve the PR once your are happy the status of the code
 
-- - Submitting comments/suggestions this way, all your comments/suggestions will be marked as *Pending* and submitted only once at the very end of this PR round.
-        - Clicking on *Add single comment* instead of *Add review comment/suggestion* would send a separate notification for each comment to everyone following the repository.
+- Submitting comments/suggestions this way, all your comments/suggestions will be marked as *Pending* and submitted only once at the very end of this PR round.
+    - Clicking on *Add single comment* instead of *Add review comment/suggestion* would send a separate notification for each comment to everyone following the repository.
 
 - You can also comment on the PR request as a whole on the main PR request page
     - For example, ask the author for more PR descriptions, links to test results, etc.
@@ -336,11 +347,12 @@ closes #14
 - Simple Zenodo example:
 
 1) Create tag on GitHub. For example, `v1.0`. You could use also use something like `v1.0_prepub`
-2) Login to Zenodo.com with your GitHub account. You can also use orcid or just create a user account. I find GitHub the easiest since I only upload code. 
-3) Upload the tagged GitHub code to Zenodo. 
+2) Login to Zenodo.com with your GitHub account. You can also use orcid or just create a user account. I find GitHub the easiest since I only upload code.
+3) Upload the tagged GitHub code to Zenodo.
 4) Add description if not included by default. For example, **Is supplement to** and add the link your GitHub repo.
 5) Finish
-- If you get any revision requests or you want to update something, you can update your _Zenodo_ repo with the latest code
-- Zenodo then creates two DOIs - one for the _repo_ and one for each uploaded _version_. You can then decide if you want to use the _repo_ DOI or the specific version in your paper. You can upload multiple GitHub tags (versions) and each of the _versions_ will get their own DOI. The main _repo_ DOI stays the same regardless on the version of the code
+
+- If you get any revision requests or you want to update something, you can update your *Zenodo* repo with the latest code
+- Zenodo then creates two DOIs - one for the *repo* and one for each uploaded *version*. You can then decide if you want to use the *repo* DOI or the specific version in your paper. You can upload multiple GitHub tags (versions) and each of the *versions* will get their own DOI. The main *repo* DOI stays the same regardless on the version of the code
 - You can also limit the visibility of the code and, for example, restrict it only to certain users (like reviewers or the editor)
 - Once uploaded you cannot edit the code (unless you make a new DOI version) but you can edit the metadata anytime
