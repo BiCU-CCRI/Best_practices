@@ -26,9 +26,9 @@
 
 - The individual GitHub Project *tickets* are called **Items**
     - Items, if assigned to a GitHub repository, can be further structured as **Issues** (**Features**) or **Sub-Issues** (**Subtasks**)
-    - Note: In code development, GitHub Items would be called **Tickets**
+    - Note: In code development, GitHub Items could be called **Tickets**
 - Item without assigned repository is a **Draft** ticket
-    - We can also create draft tickets on purpose - a quick idea with a simple description that is not ready to be started to work on, but we want to remember
+    - We can also create Draft tickets on purpose - a quick idea with a simple description that is not ready to be started to work on, but we want to remember
     - We can prefix it with `Draft:` to make it obvious it is not a complete ticket
     - This helps, for example, to distinguish Items with unassigned repository by accident from those that really are drafts
 - Assigning a repository to the Item *copies* the Item to the tagged repository and crates an **Issue**
@@ -87,7 +87,7 @@
 - As we do not follow any ISO (we might have to follow IVDR regulations in the future), and we don't have many collaboration projects, following GitHub Project status might be too much overhead, but it is still recommended
     - It helps to track the project progress and, for example, to enable better project handover
 - GitHub allows automatic Status change - See [GitHub Best Practices Guidelines/Pull Request Commit Message](./github_best_practices.md#pull-request-commit-message)
-- See [GitHub Setup - GitHub Project Ticket status](coding_and_review/TODO_github_setup.md#github-project-ticket-status) for more details
+- See [GitHub Setup - GitHub Project Ticket status](github_setup.md#github-project-ticket-status) for more details
 
 ## Branches
 
@@ -323,7 +323,7 @@ closes #14
  5. Code Review rules (resolving threads, required approval)
  6. (Not implemented yet) Successful PR tests*
 
-- See more information in [GitHub Setup](coding_and_review/TODO_github_setup.md)
+- See more information in [GitHub Setup](github_setup.md)
     - In the future, we will include [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions) to include tests in the PR approval rulesets
 
 ## Notes
