@@ -221,6 +221,17 @@
 - It is best to put even general comments as *code comments* because this is the only way how one can react to the comments, track them and resolve them
 - Some more info [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/commenting-on-a-pull-request), [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/reviewing-proposed-changes-in-a-pull-request) and [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/approving-a-pull-request-with-required-reviews).
 
+##### General comments on PR vs. comments on code
+
+Commenting on the PR in different tabs triggers different actions. Comments in the `Conversation` tab are considered general comments and do not require the reviewer's resolution. It is not possible to add an answer to these comments directly (only as another general comment). Comments to the `Files changed` tab must be resolved before the PR merge. These comments allow the developer (or anybody else) to add a direct reply. Comments in the `Review changes` (as part of the submitted review) are considered in the same way as in the `Conversation` tab and don't require resolving
+
+To summarize:
+
+- `Conversation` tab: General PR comments (no action required)
+- `Files changed` tab: Comments and suggestions to code that always trigger or require an action
+- `Files changed` tab -> `Review changes` -> `Comment` is similar to a general PR comment
+- `Files changed` tab -> `Review changes` -> `Approve` is similar to a general PR comment
+
 #### 9. Implement/discuss the PR comments
 
 - Same as in point no. 8 - reacting on comments and/or suggestions can be either done on GitHub, Teams, or in person and the same rules apply here as well

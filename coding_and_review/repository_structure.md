@@ -15,7 +15,7 @@
 - **`.github/workflows`** - GitHub actions instructions to  automate testing and deployment
 - **`.gitignore`** - `.gitignore` file
     - Following directories/files are commonly included: `bin`, `data`, `logs`, `notebooks`, `publication`, `reports`, `results`
-- **`bin`** - additional binaries that are not installed through `conda` or virtual environments or are not run through `Docker`/`Apptainer`. Instruction on installing additional software to `bin` should be described in `src/environment`
+- **`bin`** - additional binaries that are not installed through `conda` or virtual environments or are not run through `Docker`/`Apptainer`. Instruction on installing additional software to `bin` should be described in `run/run_build_envs.sh` or `envs`
 - **`config`** - configuration files for the project and analyses
 - **`data`** - raw data, databases, references, and other necessary input data. Prefer linking from shared directories whenever possible to avoid unnecessary large file duplication
     - **`data/raw`** -  raw input data for the project; this data do not change
@@ -49,7 +49,7 @@
     - `run/run_create_report.sh` - create report from the analysis.
 - **`run.sh`** - the main script to run the whole analysis, calling individual scripts from the `run` directory (e.g., get data, prepare environments, run analysis, make reports); There could be additional `run_xx.sh` scripts in the project root directory such as `run_lint.sh` or `run_check.sh` but it should be kept to a minimum
 - **`src`** - scripts for individual analysis steps. Workflow-specific scripts can be also placed within `workflow` directory(ies) if the project is based on workflows.
-    - **`src/environment`** - instructions on how to build environments (`conda`, `docker`/`apptainer` images, ...)
+    - **`src/envs`** - additional scripts/instructions on how to build environments
     - **`src/bash`** - bash scripts
     - **`src/python`** - Python scripts
     - **`src/R`** - R scripts
@@ -90,7 +90,7 @@ Note: For research-heavy projects where we don't have an *exact flow* of the cod
 
 ##### Indexes
 
-- Put indexes into the same reference directory as stated on the [top of the paragraph](#reference-structure)
+- Put indexes into the same reference directory as stated on the [top of the paragraph of References Structure](#references-structure)
 - Use: `<tool_name_with_version/<index_settings>/<index_file>`
     - For example, `STAR_2.7.4a/150bp_splice/SAindex
 - Note: Some tools don't have `<index_settings>`
@@ -99,7 +99,7 @@ Note: For research-heavy projects where we don't have an *exact flow* of the cod
 
 #### Databases
 
-- Use the same directory structure as in [Reference Structure](#reference-structure)
+- Use the same directory structure as in [References Structure](#references-structure)
 
 ### Docker/Apptainer Images
 

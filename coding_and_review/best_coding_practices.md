@@ -3,7 +3,7 @@
 - Writing good code matters - it is better for you, your colleagues, and your collaborators
     - This doesn't only apply when it comes to the [Code Review](./code_review.md) but to the overall code quality
 
-![Code quality](figures/code_quality.webp)
+![Code quality](./figures/code_quality.png)
 
 ## General Best Practices
 
