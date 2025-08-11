@@ -2,10 +2,12 @@
 
 ## General guidelines
 
-- We and do not push code directly to `main`
+- Don't push your code directly to the default branch (often `main`)
+    - `main` branch should only contain clean, tested, and functional code
+    - **Note:** For more details, see the [Why not Push Directly to the Main Branch](#why-not-push-directly-to-the-main-branch) note below
+- Do your code development in branches
     - Branches can be easily merged, reverted, commented on (Pull Request), removed without affecting the `main` branch
     - More info [here](https://stackoverflow.com/questions/46146491/prevent-pushing-to-master-on-github)
-- `main` branch should only contain clean, tested, and functional code
 - Keep the commit/PR/branches title structure consistent
 - Keep the message styles consistent
 - Keep the analysis-specific/experiment-specific code separately from the main code
@@ -13,20 +15,20 @@
 - Keep locally the same directory structure as on GitHub
     - For example, keep the GitHub repo `https://github.com/BiCU-CCRI/scripts-Public` in `~/BiCU-CCRI/scripts-Public` (or `~/projects/BiCU-CCRI/scripts-Public)
     - This makes it easier to organize your code if you have multiple projects or collaborations
-    - Also makes it easier to follow the paths when you share the code if everybody uses the same structure
+    - Also makes it easier to follow the relative paths when you share the code if everybody uses the same structure
 
 ## GitHub Projects
 
 - GitHub Projects are extremely helpful in tracking the overall project status and in collaborations
-- They allow us to write Items (Issues; Tickets) with detailed descriptions, track the development progress (Item status), assign tasks to individual developers, etc.
-- They serve as the primary project documentation for code development together with README
+- They allow us to write Items (Issues, tickets) with detailed descriptions, track the development progress (Item status), assign tasks to individual developers, etc.
+- They serve as the primary project documentation for code development together with the README (and Issues description)
     - For example, we can link individual branches and commits to the GitHub Project Item using the Item # id and get all the information used to make decisions during the development
 
 ### GitHub Project Items
 
 - The individual GitHub Project *tickets* are called **Items**
     - Items, if assigned to a GitHub repository, can be further structured as **Issues** (**Features**) or **Sub-Issues** (**Subtasks**)
-    - Note: In code development, GitHub Items could be called **Tickets**
+    - **Note:**In code development, GitHub Items could be called **Tickets**
 - Item without assigned repository is a **Draft** ticket
     - We can also create Draft tickets on purpose - a quick idea with a simple description that is not ready to be started to work on, but we want to remember
     - We can prefix it with `Draft:` to make it obvious it is not a complete ticket
@@ -53,17 +55,19 @@
 
 ##### Merging order
 
-- You can decide on what level you want to work and how to structure the *merging* order:
+You can decide on what level you want to work and how to structure the *merging* order:
 
- 1. `subtask`->`feature`->`main`
- 2. `feature`->`main`
- 3. `subtask`->`main`
+1. `subtask`->`feature`->`main`
+2. `feature`->`main`
+3. `subtask`->`main`
 
-- The decision should be based on the Issue *size* and urgency:
+The decision should be based on the Issue *size* and urgency:
 
- 1) For bigger tasks, it is recommended to go `subtask`->`feature`->`main`
- 2) For smaller tasks that add new functionality, you can do `feature`->`main`
- 3) The third option is usually used if we collaborate on a project with another person. and the finished Subtask makes it easier for the other person to continue the development.
+1. For bigger tasks, it is recommended to go `subtask`->`feature`->`main`
+2. For smaller tasks that add new functionality, you can do `feature`->`main`
+3. The third option is usually used if we collaborate on a project with another person. and the finished Subtask makes it easier for the other person to continue the development.
+
+**Note:** In some cases, you can merge `feature2`->`feature1` - this might be useful if you need to add a significant chunk of code to the codebase but you are too far in the code development of `feature1` and don't want to do a subsequent `git rebase`.
 
 #### Items (Tickets/Issues) Description
 
@@ -75,12 +79,16 @@
 
 #### Sub-Issues (Subtasks)
 
-- GitHub now offers creating Subtasks (Sub-Issues) automatically
-    - When writing the Feature description, you can use check-box markdown notation `- [ ]`  in the description *body* and then click on *Create Sub-issue* on the right
-- You can also assign an existing Item as a Sub-Issue (*Add existing issue*) or create a Sub-Issue with *Create sub-issue*
+- GitHub can create [Issues and Sub-issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues) automatically
+- When writing the Issue description, you can use check-box markdown notation `- [ ]` in the description *body* and then click on `Convert to sub-issue` on the right
+    - This creates a new Issue and moves the `- [ ]` *text* below the main desciption text box
+    - **Note:** You can also use the same feature to create new Issues, not jus Sub-issues
+- You can also add an existing Item as a Sub-Issue (`Add existing issue`)
 - This links the Items together, and you see which ones are related
+- **Note:** If you want and Subtask (Sub-issue) to be associate with a Project, you have to manually assign it to it
+- Using `feature-` and `subtask-` at the beginning of the Issue/Sub-issue name helps to quickly identify the Issue *type* in the Repository Issues tab and/or in the Repository Project. It also helps to recognize the PR merge *type* if you follow the naming structure from [GitHub Best Practices](./github_best_practices.md#pull-request-title-structure).
 
-#### Ticket status in GitHub Project
+#### Issues/ticket status in GitHub Project
 
 - GitHub Project offers *status columns*
     - These are useful when we want to fully track the development process (for example, essential for many IT-related ISO certification) when multiple people collaborate on the same project, or when we want to keep track of where we left off if we have to switch between projects
@@ -106,7 +114,7 @@
 - The branch **name structure**: `<issue_number>-<issue_prefix>-<rest-of the-issue-name>`
 - Regex: `^\d+-(feature|subtask|experiment|test|janitor|bugfix|hotfix|release)-([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)$`
     - We can enforce the `git branch` regex for every commit to keep the structure standardized
-    - Note: The name structure follows GitHub *automatic*
+    - **Note:**The name structure follows GitHub *automatic*
 - For example: `4-subtask-assemble-chromosomes`
 
 ### Creating Branches
@@ -115,7 +123,7 @@
     - GitHub then names the branch according to the Issue name
 - **Don't forget** to change the *parent* branch to the Feature branch when using this GitHub functionality!
     - It avoids unnecessary `git rebase` commands and conflict resolution
-- Don't forget to include the Issue number, the prefix, and the name as described above if you create the branch yourself
+- Don't forget to include the Issue number, the prefix, and the name as described below if you create the branch yourself
 
 ## Commits
 
@@ -123,10 +131,10 @@
     - It makes it easier for Code Review, follow the code changes, and revert the code if necessary
 - Commit **messages** are written in [**imperative**](https://cbea.ms/git-commit/#imperative) verb form
     - For example: **Write** "*Fix missing variable*" and **do not** write "*Fixed missing variable*" or "*Fixes missing variable*"
-    - Note: An easy way to remember is to say to yourself: "*If applied, my commit will (INSERT COMMIT MESSAGE TEXT)*"
+    - **Note:**An easy way to remember is to say to yourself: "*If applied, my commit will (INSERT COMMIT MESSAGE TEXT)*"
 - Use the ticket number, including the hash symbol `#` as the first character of the commit message
     - This allows easier traceability (you can directly click the ticket number in the commit to see the ticket description)
-    - Note: You might have to change your `git` settings to turn off ignoring commit messages starting with `#<issue_number>` (unfortunate GitHub Issues labeling)
+    - **Note:**You might have to change your `git` settings to turn off ignoring commit messages starting with `#<issue_number>` (unfortunate GitHub Issues labeling)
     - `git config --global commit.cleanup whitespace`
 - The next word of the commit message starts with a **capital letter**
     - This makes it clear the commit message is complete and as intended
@@ -202,10 +210,10 @@
 
 ### Pull Request Title Structure
 
-- The RP title structure: `<#issue number> <issue type>-<Rest of the issue name>`
+- The PR title structure: `<#issue number> <issue type>-<Rest of the issue name>`
 - Regex: `^#\d+ (feature|subtask|experiment|test|janitor|bugfix|hotfix|release)-[A-Z][a-zA-Z0-9]*$`
 - For example: `#1 feature-Implement performance testing`
-- Note: Unfortunately, GitHub doesn't allow setting rulesets separately for PR merge and *regular* commit message (PR merge is technically just another commit). We cannot include the `(feature|subtask|experiment|test|janitor|bugfix|hotfix|release)` in the rulesets
+- **Note:**Unfortunately, GitHub doesn't allow setting rulesets separately for PR merge and *regular* commit message (PR merge is technically just another commit). We cannot include the `(feature|subtask|experiment|test|janitor|bugfix|hotfix|release)` in the rulesets
 
 ### Pull Request Commit Message
 
@@ -213,7 +221,7 @@
 - Do not confuse the **PR commit message** with **PR comment** (=PR comment is **not** included in the `git` history)
     - Unfortunately, GitHub puts PR comment on the top, making it slightly less obvious what is what
     - You can use the PR comment section to make notes and keep track of the development and then copy the text (or part of it) to the PR commit message
-    - Note: You can use the `- [ ]` markdown check-box option to keep track of your own development progress on both Subtask and Feature levels
+    - **Note:** You can use the `- [ ]` markdown check-box option to keep track of your own development progress on both Subtask and Feature levels
 - For a Subtask merge, the PR commit message can be a sentence or bullet points summarizing the commits
 - For a Feature merge, the PR commit message can be a list of included Subtasks + the description of the additional commit(s) at the Feature level:
 
@@ -233,7 +241,7 @@ closes #14
     - The `closes` therefore closes the PR itself, the Issue, and the Item
         - You can also close the Issues manually by clicking on `Close issue` in the Issues tab and by moving the GitHub Project Item to "*Done*"
 - More on how to write a good PR commit message [here](https://medium.com/@koklitheen/writing-a-good-merge-request-3916cfce0518) - you can be as verbose as necessary
-- Note: Once the PR is merged with the parent branch and you or your collaborator have other branches from the same parent branch, it can happen that the *other* merges won't be possible without rebasing
+- **Note:**Once the PR is merged with the parent branch and you or your collaborator have other branches from the same parent branch, it can happen that the *other* merges won't be possible without rebasing
     - `git rebase` basically means "*Take my changes (commits) and put them on top of the other changes (commits)*"
     - You might have to do this manually in your code editor by `git checkout` to your branch and then clicking on the parent branch and *Rebase my current branch onto the parent branch*
     - VS Code offers a nice visual rebasing guide to get you through the changes
@@ -256,46 +264,46 @@ closes #14
 
 - PR is initiated by the developer by:
 
-1. Click on *Pull requests* in your repository
-2. *New pull request*
+1. Click on `Pull requests` in your repository
+2. `New pull request`
 3. Choose the right parent branch to merge to and the branch to be merged on the top left
-4. *Create pull request*
-5. Assign yourself as the *Assignee* (to get notifications about changes/comments)
-6. Once done, find your reviewer, assign them in the *Reviewers* section on the top-left, and notify them
+4. `Create pull request`
+5. Assign yourself as the `Assignee` (to get notifications about changes/comments)
+6. Once done, find your reviewer, assign them in the `Reviewers` section on the top-left, and notify them
 7. Wait for the reviewer to finish their review (described in the [Pull Request Review as a Reviewer](#pull-request-review-as-a-reviewer) section)
 8. Reply/Accept suggestions/Implement changes (don't forget to `git push`)
-9. Click on *Re-request review* in the *Reviewers* section on the top-left (two arrows in a circular shape)
+9. Click on `Re-request review` in the `Reviewers` section on the top-left (two arrows in a circular shape)
 10. Repeat steps 7-9 as many times as necessary
 11. Merge the PR once all the comments/suggestions are solved and the PR is approved by the reviewer
 
-- Note: I like to create a PR right after the first commit to the new branch and assign myself
-    - Because the PR is not ready for review, I mark it as *Draft* (on the top right *Still in progress? Convert to draft*). Once done, you can open the PR and click *Ready for review* to enable the review process
-    - This helps me to keep track of all my open PRs
-    - Remove the *Draft* before asking for the review
-- Note: Clicking on *Re-request review* allows the reviewer to submit another review. It also allows them to re-approve the PR in case they pre-approved it and the approval was dismissed
+**Note:** Clicking on `Re-request review` allows the reviewer to submit another review. It also allows them to re-approve the PR in case they pre-approved it and the approval was dismissed
+
+**Recommendation:** Create a Pull request as soon as possible, even if the development is not yet complete. You can use `Still in progress? Convert to draft` option in GitHub Pull request and/or prefix the *draft* PR title with `Draft:` to keep track of your open PRs. You can view the open PRs by clicking the Pull request icon on the top right (next to your profile icon).
+
+**Recommendation:** You can put a checklist in the PR message body to track your TODO list. This also makes it easier to summarize the *implementations* included in the PR before the merge.
 
 ### Pull Request Review as a Reviewer
 
-- Once you are nominated as a PR Reviewer, don't forget to check if you are *officially* assigned in the *Reviewers* tab in the PR (top left)
+- Once you are nominated as a PR Reviewer, don't forget to check if you are *officially* assigned in the `Reviewers` tab in the PR (top left)
     - This way, you get notified about any changes to the PR
 
 - To start a review as a reviewer:
 
-1) Go to *Pull requests* tab
-2) Find the Pull request you were asked to review
-3) Go to *Files changed* tab
-4) Look for the changes
-5) Go to the line you want to comment on/make a suggestion
-6) Click on the small blue `+` sign (you can select multiple lines by dragging the `+` sign down)
-7) Add a comment or a suggestion (`+/-` sign)
-8) **Important** Click on *Start a review* (if it's the first comment/suggestion, otherwise click on *Add review comment/suggestion*)
-9) Add all your comments/suggestions
-10) Once done, go to the top and click *Finish your review*
-11) You add an overall comment if you like
-12) Select the required follow-up - *Comment/Approve/Request changes*. *Request changes* will probably be the most common option, especially at the beginning of the PR
-13) Wait for the developer to reply/accept suggestions/implement changes (described in the [Pull Request Review as a Developer](#pull-request-review-as-a-reviewer) section)
-14) Repeat steps 1-13 as many times as necessary
-15) Approve the PR once your are happy the status of the code
+1. Go to *Pull requests* tab
+2. Find the Pull request you were asked to review
+3. Go to *Files changed* tab
+4. Look for the changes
+5. Go to the line you want to comment on/make a suggestion
+6. Click on the small blue `+` sign (you can select multiple lines by dragging the `+` sign down)
+7. Add a comment or a suggestion (`+/-` sign)
+8. **Important** Click on *Start a review* (if it's the first comment/suggestion, otherwise click on *Add review comment/suggestion*)
+9. Add all your comments/suggestions
+10. Once done, go to the top and click *Finish your review*
+11. You add an overall comment if you like
+12. Select the required follow-up - *Comment/Approve/Request changes*. *Request changes* will probably be the most common option, especially at the beginning of the PR
+13. Wait for the developer to reply/accept suggestions/implement changes (described in the [Pull Request Review as a Developer](#pull-request-review-as-a-reviewer) section)
+14. Repeat steps 1-13 as many times as necessary
+15. Approve the PR once your are happy the status of the code
 
 - Submitting comments/suggestions this way, all your comments/suggestions will be marked as *Pending* and submitted only once at the very end of this PR round.
     - Clicking on *Add single comment* instead of *Add review comment/suggestion* would send a separate notification for each comment to everyone following the repository.
@@ -311,30 +319,52 @@ closes #14
 - You can do **everything** you can do in GitHub without leaving the VS Code
 - Check out this [video](https://www.youtube.com/watch?v=DSl-L6B_Qb4&ab_channel=DevLeonardo) for a nice summary
 
+### Git tags
+
+- Git tags are markers **attached to specific commits** to label **important points** in your project’s history
+- Most commonly used for versioning (e.g., `v1.0.0`)
+- Unlike branches, tags don’t move; they’re fixed to a commit
+- Typically, you tag the `main` branch
+- Very useful if you want to share the code with somebody else or with users (e.g., you can include the git tag version in the local copy of the code)
+
 ## GitHub Rules
 
 - GitHub offers a lot of [rules/rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets) to help us enforce the agreed *rules* for commit names, branch names, PR rules, branch protection rules, etc.
 - We primarily use these rules:
 
- 1. Commit message structure
- 2. Branch name structure
- 3. PR title structure
- 4. `main` branch protection (no direct commit - only through PR)
- 5. Code Review rules (resolving threads, required approval)
- 6. (Not implemented yet) Successful PR tests*
+1. Commit message structure
+2. Branch name structure
+3. PR title structure
+4. `main` branch protection (no direct commit - only through PR)
+5. Code Review rules (resolving threads, required approval)
+6. (Not implemented yet) Successful PR tests*
 
-- See more information in [GitHub Setup](github_setup.md)
+- See more information in [GitHub Setup](./github_setup.md)
     - In the future, we will include [GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions) to include tests in the PR approval rulesets
 
 ## Notes
 
-### Commit/Branch/Pull Request title structure
+### Why not push directly to the `main` branch?
+
+- Prevents non-reviewed, potentially breaking changes
+- The `main` branch is functional until the changes are merged
+- Makes the `main` commit history clean
+    - Fewer commits from (squashed) PR branches while keeping the original commit history in the source PR branch (assuming you do not delete the *source* branch)
+- Easier backtracking of where the changes happened
+- Easier backtracking of the previous code
+- Easier backtracking for task description (GitHub Project tickets)
+- Two (or more) people can work on the same code at the same time and submit PRs
+
+We protect the `main` branch to ensure we follow the agreed-upon best coding practices and CR.
+
+### Commit message/Branch name/Pull Request title structure
 
 - We have two (+1) different ways how to name commits, branches, and PR merges
     - This comes from the unfortunate GitHub styling of `#<issue number>`
 - Some *sections* are ok with having `#` as the title/message character (commit message `git`/PR title), while some struggle (switching branches names in the command line)
 - The current title/message structure comes from the *least necessary* changes
 - In optimal case, the Issue IDs would start with a custom ID that can be used in all three names (=starting with anything but `#`)
+- For more information about title/message structures, please see [commit message structure](#commit-message-structure), [branch name structure](#branch-name-structure), and [pull request title structure](#pull-request-title-structure)
 
 ### Code Publishing
 
@@ -346,11 +376,11 @@ closes #14
     - They also offer direct code import from GitHub (how-to video [Zenodo](https://www.youtube.com/watch?v=HZ6m8oxwvig&ab_channel=LukeDataManager); how-to [FigShare](https://help.figshare.com/article/how-to-connect-figshare-with-your-github-account))
 - Simple Zenodo example:
 
-1) Create tag on GitHub. For example, `v1.0`. You could use also use something like `v1.0_prepub`
-2) Login to Zenodo.com with your GitHub account. You can also use orcid or just create a user account. I find GitHub the easiest since I only upload code.
-3) Upload the tagged GitHub code to Zenodo.
-4) Add description if not included by default. For example, **Is supplement to** and add the link your GitHub repo.
-5) Finish
+1. Create tag on GitHub. For example, `v1.0`. You could use also use something like `v1.0_prepub`
+2. Login to Zenodo.com with your GitHub account. You can also use orcid or just create a user account. I find GitHub the easiest since I only upload code.
+3. Upload the tagged GitHub code to Zenodo.
+4. Add description if not included by default. For example, **Is supplement to** and add the link your GitHub repo.
+5. Finish
 
 - If you get any revision requests or you want to update something, you can update your *Zenodo* repo with the latest code
 - Zenodo then creates two DOIs - one for the *repo* and one for each uploaded *version*. You can then decide if you want to use the *repo* DOI or the specific version in your paper. You can upload multiple GitHub tags (versions) and each of the *versions* will get their own DOI. The main *repo* DOI stays the same regardless on the version of the code

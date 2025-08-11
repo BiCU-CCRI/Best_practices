@@ -21,6 +21,8 @@
 - **Minimize the use of comments** in the code - Let the code speak for itself by choosing proper variable and function names
     - Notes worth keeping could be included in the README or NOTES, not in the code
     - Avoid unexplained commented *run* code in the scripts
+    - Of course, you can keep comments explaining the reasons of why this command was used and some alternative, the racionale for the chosen settings, etc.
+        - This might especially useful in research, data analysis-heavy, or novel code
 - **Don't keep unused code**
     - Keep only used and relevant code relevant in the final version
     - Unnecessary code makes it harder to read, it is more difficult to maintain and draws focus away from the most important sections
@@ -56,15 +58,15 @@
 ### Shell
 
 - [Shell code styling practices from Google](https://google.github.io/styleguide/shellguide.html)
-    - Note: Google has​ other styleguides and best coding practices recommendation for many other [languages](https://google.github.io/styleguide/)
+    - **Note:**Google has​ other styleguides and best coding practices recommendation for many other [languages](https://google.github.io/styleguide/)
 - Additional best practices [here](https://medium.com/codecuriosity/shell-script-best-practices-048696404b3a) (PDF version [here](./examples/Shell_Script_Best_Practices_Neuro_Bytes_CodeCuriosity_Oct,_2024_Medium.pdf))
 - Another nice (and short) summary [here](https://bertvv.github.io/cheat-sheets/Bash.html)​
 - Set `set -ueo pipefail` on the top of your bash scripts to capture unset variables, error codes, etc.
     - Description of the used flags [here](https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425#file-bash_strict_mode-md)
 - Quote variables to prevent word-splitting
 - Don't put passwords and
-- Use `#!/bin/bash -x` or `#!/bin/bash -v` for debugging
-    - Note: You can also use `bash -x my_script.sh` or `bash -c my_script.sh` to run the scripts to get the same outcome
+- **Note:** Use `#!/bin/bash -x` or `#!/bin/bash -v` for debugging
+    - **Note:**You can also use `bash -x my_script.sh` or `bash -c my_script.sh` to run the scripts to get the same outcome
 
 ### R
 
@@ -74,7 +76,8 @@
 ### Python
 
 - We follow [PEP 8 code formatting](https://peps.python.org/pep-0008/) - widely accepted and the industry standard
-    - Note: `black` with `isort` we use for code styling follow [PEP 8 formatting](https://github.com/psf/black?tab=readme-ov-file#the-black-code-style) (see [Code Editors Formatters](#code-editors-formatters))
+    - **Note:**`black` with `isort` we use for code styling follow [PEP 8 formatting](https://github.com/psf/black?tab=readme-ov-file#the-black-code-style) (see [Code Editors Formatters](#code-editors-formatters))
+- **Note:** Python equivalent of `bash -x` is `python3 -m trace -t myscript.py`
 
 ### Markdown
 
@@ -94,8 +97,8 @@
 - Code **Formatters** can be utilized to format the code and unify the coding style automatically
 - The most common code autoformatting options are:
 
-1) [Code editors formatters](#code-editors-formatters)
-2) [Command-line formatters](#command-line-formatters)
+1. [Code editors formatters](#code-editors-formatters)
+2. [Command-line formatters](#command-line-formatters)
 
 #### Code Editors Formatters
 
@@ -105,7 +108,7 @@
     - shell: [foxundermoon.shell-format](https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format)
     - Python: [ms-python.black-formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter) together with [ms-python.isort](https://marketplace.visualstudio.com/items?itemName=ms-python.isort)
     - `snakemake`: [tfehlmann.snakefmt](https://marketplace.visualstudio.com/items?itemName=tfehlmann.snakefmt)​
-    - `nextflow`; [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode); Note: `nextflow` offers VS Code extension [nextflow.nextflow](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow) for syntax highlighting, completion, and error checking (more information [here](https://nf-co.re/docs/contributing/code_editors_and_styling/code_formatting) and [here](https://nf-co.re/docs/guidelines/documentation/writing_style))
+    - `nextflow`; [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode); **Note:**`nextflow` offers VS Code extension [nextflow.nextflow](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow) for syntax highlighting, completion, and error checking (more information [here](https://nf-co.re/docs/contributing/code_editors_and_styling/code_formatting) and [here](https://nf-co.re/docs/guidelines/documentation/writing_style))
     - Markdown: [DavidAnson.vscode-markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)​
     - Dockerfile: [ms-azuretools.vscode-docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)​
     - YAML: [redhat.vscode-yaml](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)​
@@ -122,7 +125,7 @@
     - R: [`air`](https://github.com/posit-dev/air)
         - Atm, `air` has to be installed as an [external formatter](https://posit-dev.github.io/air/editor-rstudio.html) in RStudio but it's much faster than `{styler}`
         - It also follows the `tidyverse` styling guide (with minor deviations)
-        - Note: It can be also used from a command line and setting up git pre-commit hooks is much easier than `{styler}`
+        - **Note:**It can be also used from a command line and setting up git pre-commit hooks is much easier than `{styler}`
     - R: {[`styler`](https://styler.r-lib.org/index.html)}
         - Assign a keyboard shortcut in RStudio and use it before a commit
         - Alternatively, `{styler}` can be included in [git pre-commit hook](#git-pre-commit-hooks-for-code-formatting-and-linting) using [{precommit}](https://github.com/lorenzwalthert/precommit) package
@@ -130,7 +133,7 @@
 #### Command-line Formatters
 
 - Some of the code formatters can be used from the command line, or as part of the git pre-commit hooks:
-    - Python: [`isort`](https://pypi.org/project/isort/) and [`black`](https://pypi.org/project/black/)
+    - Python: [`black`](https://pypi.org/project/black/) and [`isort`](https://pypi.org/project/isort/)
     - R: [`air`](https://github.com/posit-dev/air)
     - snakemake: [`snakefmt`](https://github.com/snakemake/snakefmt)
     - nextflow: doesn't have a dedicated code formatter but recommends using [*standard* ones](https://nf-co.re/docs/contributing/code_editors_and_styling/code_formatting) ; [here](https://nf-co.re/docs/guidelines/documentation/writing_style) is a summary of recommended code styling for `nextflow`
@@ -154,8 +157,25 @@
     - The same applies to linting
 - You can set pre-commit hooks manually, but it's much easier to use [pre-commit](https://pre-commit.com/)
     - Example on how to setup pre-commit hook for `nextflow` using `prettier` [here](https://nf-co.re/docs/contributing/code_editors_and_styling/code_formatting#running-with-pre-commit)
-- Note: `git pre-commit` hooks **don't** have to be applied **only** to code **formatting or linting** - you can use them for any git-related actions
-- Note: Some code editors' UI git commit functionality does not fully support git hooks and you have to `--amend` or run the tools separately
+- **Note:** `git pre-commit` hooks **don't** have to be applied **only** to code **formatting or linting** - you can use them for any git-related actions
+- **Note:** Some code editors' UI git commit functionality does not fully support git hooks and you have to `--amend` or run the tools separately
+
+## GitHub Actions
+
+- [GitHub Actions](https://github.com/features/actions) allow us to automatically run a specific set of commands after each GitHub event (often at `push`). These commands run on the GitHub side and are paid.
+- We can, for example, use it to run tests, code formatting, code linting, and even automatic PR suggestions
+
+### Example of GitHub Actions
+
+- Python: [https://github.com/actions/setup-python](https://github.com/actions/setup-python)
+- Shell: [https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/add-scripts](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/add-scripts)
+- R: [https://github.com/r-lib/actions/](https://github.com/r-lib/actions/)
+- Examples of automatic PR suggestions
+    - [CODEX CLI](https://github.com/openai/codex?tab=readme-ov-file#non-interactive--ci-mode)
+    - [GitHub Copilot Code Review](https://docs.github.com/en/copilot/how-tos/agents/copilot-code-review/configuring-automatic-code-review-by-copilot)
+    - [Or custom GitHub Actions](https://gist.github.com/bradenkeith/e25914ba3150d7bb575f7ccc7eb24767).
+
+[More examples of GitHub Action and summaries](https://codex.so/github-actions-intro-en).
 
 ## Examples
 
@@ -176,7 +196,7 @@ yq eval '.name' config.yaml
 # John Doe
 ```
 
-- Note: Don't install `yq` with `conda`. `conda` only contains a very old version of `yq` (v3.4.3; current is v4.44.5). Installing it directly from [GitHub](https://github.com/mikefarah/yq?tab=readme-ov-file#install) is better.
+- **Note:**Don't install `yq` with `conda`. `conda` only contains a very old version of `yq` (v3.4.3; current is v4.44.5). Installing it directly from [GitHub](https://github.com/mikefarah/yq?tab=readme-ov-file#install) is better.
 
 ### Python Code Formatting `git pre-commit` Hook
 
@@ -186,48 +206,13 @@ To autoformat Python code **before** `git commit`, you can do the following:
 
 1. Install `isort` and `black`
 
+You can use your base `conda` environment or install it directly on your system. You could also use `virtualenv`.
+
 ```shell
 pip3 install isort black
 ```
 
-You can also install it on your base `conda` environment
-
-2. Save the following code into  `~/.git/hooks/pre-commit` file + add execution permissions `chmod +x ~/.git/hooks/pre-commit`.
-
-```shell
-#!/bin/bash
-
-# This section ensures your locally set pre-commit hooks are executed as well
-if test -e ./.git/hooks/pre-commit; then
-    bash ./.git/hooks/pre-commit
-fi
-
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
-
-# Source conda unless we have the formatters installed system-wide
-source "${CONDA_PREFIX}/etc/profile.d/conda.sh"
-  
-# Find all staged .py files (before commit)
-python_files=$(git diff --cached --name-only --diff-filter=ACMR "*.py")
-
-# Do NOT quote $python_files here
-if [ -n "$python_files" ]; then
-    if ! command_exists black; then
-        echo "black is not installed, skipping"
-    else
-        black $python_files
-        git add $python_files
-    fi
-    if ! command_exists isort; then
-        echo "isort is not installed, skipping"
-    else
-        isort $python_files
-        git add $python_files
-    fi
-fi
-```
+2. Save the example code [pre-commit code](./examples/pre-commit_python) as  `~/.git/hooks/pre-commit` file and add execution permissions `chmod +x ~/.git/hooks/pre-commit`.
 
 3. Edit `~/.gitconfig` by adding:
 
@@ -246,38 +231,15 @@ git config --global core.hooksPath /home/${USER}/.git/hooks
 
 The following git pre-commit hooks will run [`air`](https://github.com/posit-dev/air) automatically **only for git staged R scripts** before `git commit`.
 
-To autoformat R code **before** `git commit`, you can put the following into your `~/.git/hooks/pre-commit` (for more info on how to set up the hooks see the [Python Code Formatting `git pre-commit` Hook](#python-code-formatting-git-pre-commit-hook)):
+**Note:** For more info on how to set up the git hooks see the [Python Code Formatting `git pre-commit` Hook](#python-code-formatting-git-pre-commit-hook).
 
-```bash
-#!/bin/bash  
+See To autoformat R code **before** (=pre) `git commit`, you can put the example [R pre-commit code](examples/pre-commit_R) to your `~/.git/hooks/pre-commit` (`air` has to be installed in your base `conda` environment or on your system).
 
-# This section ensures your locally set pre-commit hooks are executed as well
-if test -e ./.git/hooks/pre-commit; then
-    bash ./.git/hooks/pre-commit
-fi
+**Note:** If you use `ShellCheck` extension in VS Code, you might have to add `# shellcheck disable=SC2086` above **each** of the lines you don't want to be quoted automatically.
 
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
+### `snakemake` Code Formatting `git pre-commit` Hook
 
-# Source conda unless we have the formatters installed system-wide
-source "${CONDA_PREFIX}/etc/profile.d/conda.sh"
-
-# Find all staged .R and .r files (before commit)
-r_files=$(git diff --cached --name-only --diff-filter=ACMR | grep -e '\.R$' -e '\.r$')
-
-# Do NOT quote $r_files here
-if [ -n "$r_files" ]; then
-    if ! command_exists air; then
-        echo "air is not installed, skipping"
-    else
-        air format --no-color $r_files
-        git add $r_files
-    fi
-fi
-```
-
-Note: If you use `ShellCheck` extension in VS Code, you might have to add `# shellcheck disable=SC2086` above **each** of the lines you don't want to be quoted automatically.
+Following the [Python](#python-code-formatting-git-pre-commit-hook) and [R formatting](#r-code-formatting-git-pre-commit-hook) instructions above, you can do the [same thing for `snakemake`](./examples/pre-commit_snakemake) with `snakefmt`.
 
 ### `shell` Code Formatting Upon Save
 

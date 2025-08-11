@@ -13,7 +13,7 @@
     - **Integration tests** - verify that multiple modules work together - for example, multiple pipelines working together to create one unified result.
     - **Smoke tests** - verify that the system (for example, cluster or front-end) is working as it should. These are quick tests that check for potential anomalies that can limit the system and we don't constantly track
 - We also have to use **Manual testing** as part of the Code Review or for complicated environments
-- Note: We cannot test every user's behavior
+- **Note: **We cannot test every user's behavior
     - We can limit certain behaviors in the README of function input limits
     - For example, we can specify the input to the function is a `fastq` file - we do not have to test whether the input is a non-empty `fastq` file as it is not an issue of the code but of the user themselves
 
@@ -33,7 +33,7 @@
     - In that case, you should provide access to *hard to reasonably test* parts of the results and make tests for the rest of the code
 - They don't go into the details, which might make it more difficult to identify the key error
 - They are also useful for code sharing and deployment where we want to make sure that a *second-person* environment setup produces the same results
-- Note: As E2E tests usually require bigger test files, be careful when uploading them to GitHub
+- **Note: **As E2E tests usually require bigger test files, be careful when uploading them to GitHub
     - The total GitHub repository should be ideally [smaller than 1 GB](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github) (including the history)
     - If your test files are large(-ish), use [git LFS](https://docs.github.com/en/repositories/working-with-files/managing-large-files/configuring-git-large-file-storage) or [DVC](https://dvc.org/). In edge-case scenarios, you can also use local server-hosted files.
 - For ongoing **development**, it's better to rely on faster, more low-level tests (like [unit tests](#unit-tests)) because they can identify and localize the problem faster
@@ -42,15 +42,15 @@
 #### End-to-end Tests Framework
 
 - The easiest way to set and evaluate E2E tests is to use the `diff` command between the expected result and the actual result
-- In some cases, you have to sort or otherwise *normalize* the results so they are truly comparable
+- In some cases, you have to sort or otherwise *standardize* the results so they are truly comparable. Since `diff` is text based, the most common *standardize* is `sort`, `ls`, ...
 - You can also compare the file size, text outputs, etc. - anything that can be run in the test environment (see [Where to run tests](#where-to-run-tests))
 
 ### Unit Tests
 
 - Unit tests test individual **functions** or parts of the code
 - In general, it is recommended to structure your code in functions as they can be easily tested and they make the code easier to understand
-    - Don't forget to name your function properly - the same applies to [unit test functions and class names](https://docs.python.org/3.8/library/unittest.html#basic-example) (see [Practical unit tests examples](#end-to-end-tests-1) for more details)
-    - Note: *class* is a group of single tests testing a single function for multiple input and output options. We don't have to use classes for all unit tests if the tested function is simple enough
+    - Don't forget to name your function properly - the same applies to [unit test functions and class names](https://docs.python.org/3.8/library/unittest.html#basic-example)
+    - **Note: ***class* is a group of single tests testing a single function for multiple input and output options. We don't have to use classes for all unit tests if the tested function is simple enough
 - They are based on comparing the expected outputs with the actual outputs
     - The output form depends on the real function output object - string, value, data frame, array, ...
     - The input is usually *simplified* to a minimum so it can fit into the body of the test function
@@ -66,13 +66,13 @@
 - Manually setting up tests for each function might take some time
     - One has to think about possible scenarios and write that in the test function
     - Luckily, most code editors have add-ins that help create unit tests, so you don't have to build everything from scratch!
-        - Note: The add-ins are usually good in providing unit test *backbone* - you still have to check the suggestion and adjust it according to the *real* theoretical inputs/outputs
+        - **Note: **The add-ins are usually good in providing unit test *backbone* - you still have to check the suggestion and adjust it according to the *real* theoretical inputs/outputs
 
 #### Unit Test Frameworks
 
 - Many frameworks help with unit tests and do the comparisons automatically:
     - Python: [unittest](https://docs.python.org/3/library/unittest.html); library specific - for example [pandas unit testing](https://pandas.pydata.org/docs/reference/testing.html)
-    - Bash: [bats](https://github.com/bats-core/bats-core);  Note: other possible frameworks summarized [here](https://medium.com/wemake-services/testing-bash-applications-85512e7fe2de)
+    - Bash: [bats](https://github.com/bats-core/bats-core);  **Note: **other possible frameworks summarized [here](https://medium.com/wemake-services/testing-bash-applications-85512e7fe2de)
     - R: [testthat](https://testthat.r-lib.org/); [R testing basics](https://r-pkgs.org/testing-basics.html)
 - It is also a good idea to use test [code coverage](https://www.atlassian.com/continuous-delivery/software-testing/code-coverage) to see how many functions we covered by the tests:
     - Python: [`coverage.py`](https://coverage.readthedocs.io/en/latest/); [`pytest`](https://pytest-cov.readthedocs.io/en/latest/readme.html)
@@ -108,6 +108,7 @@
     - For example, GitHub Actions tests for [Python](https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-python) or example for [bash](https://www.geeksforgeeks.org/run-bash-script-in-github-actions/)
     - GitHub Actions use [Runners](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners) - virtual machines to run workflows
         - Runners use predefined environments that we can [modify](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/customizing-github-hosted-runners) to fit our development environment to some extent - following [Best Coding Practices](./best_coding_practices.md) helps a lot
+- **Note:** GitLab has better CI/CD intergration compared to GitHub because it can run the tests locally. GitHub runs the tests in online virtual machines.
 
 ## Where to Store Tests
 
@@ -117,12 +118,22 @@
     - Add subdirectories based on the tested code
         - Tested code is in `src/bash/bunch_of_functions.sh` and the actual tests are  in `tests/unit/bash/bunch_of_functions.test.sh`
 
+### Tests input and output
+
+- unit tests input and output is saved in the unit test **scripts itself**
+- E2E tests require test input and expected output. The most common structure is:
+    - E2E test input file(s): `tests/e2e/inputs/<tested_script_of_workflow_name>/input/<test_input_file>`
+    - E2E tests expected output file(s): `tests/e2e/expected/<tested_script_of_workflow_name>/input/<expected_test_output_file>`
+    - E2E tests *helper* scripts and utils (for example, how to generate input files, etc.): `tests/e2e/utils`
+    - E2E tests config files `tests/e2e/config/<test_config_file>`
+    - **Note:** If you are also testing the input/output directory structure, you can store your E2E tests in the expected structure
+
 ## Workflow Managers
 
 ### `snakemake`
 
 - `snakemake` offers functionality to set up[unit tests automatically](https://snakemake.readthedocs.io/en/stable/snakefiles/testing.html) after successfully running the pipeline with test data
-    - Note: There are some [issues](https://github.com/snakemake/snakemake/issues/3137) in the newer `snakemake` releases with this functionality
+    - **Note: **There are some [issues](https://github.com/snakemake/snakemake/issues/3137) in the newer `snakemake` releases with this functionality
 - For automatic testing on GitHub, `snakemake` offers GitHub Actions instructions for [pipeline testing](https://github.com/snakemake/snakemake-github-action) and [linting](https://github.com/snakemake/snakefmt#github-actions)
 
 ### `nextflow`
@@ -131,10 +142,10 @@
 
 ## Practical Tests Examples
 
-### End-to-end Tests
+### End-to-End Tests
 
-TODO
+WiP
 
 ### Unit Tests
 
-TODO
+WiP

@@ -46,7 +46,7 @@
     - We have to plan extra time for CRs when planning for other projects and analyses
 - You have to ask a second person (Reviewer) for the Review, but the Reviewers might be busy
     - Their work, other projects, vacations, etc.
-    - Note: We should target making CR our priority because it blocks the other person from progressing their Project or from handing over the code to their collaborator
+    - **Note:**We should target making CR our priority because it blocks the other person from progressing their Project or from handing over the code to their collaborator
 - Personal preferences and miscommunication happen
     - Different coding preferences and styles might lead to conflicts​ (see [Code styling](./best_coding_practices.md#code-styling) for easy ways to mitigate this)
     - Sometimes, it is better to accept a suggestion than to argue if it doesn't break the functionality and still follows the best practices
@@ -69,7 +69,7 @@
 - **Easier new members onboarding​**
 - **Builds useful habits for the future​** and for your career in general
 - **Necessary for [ISO](https://www.institutedata.com/us/blog/iso-standards-for-software-engineering/) certification​s** including [IVDR](https://eur-lex.europa.eu/eli/reg/2017/746/oj)
-    - Note: `nextflow` has a nice summary of pipeline [certification requirements](https://nf-co.re/docs/guidelines/regulatory/overview)
+    - **Note:**`nextflow` has a nice summary of pipeline [certification requirements](https://nf-co.re/docs/guidelines/regulatory/overview)
 
 ## When to do Code Review
 
@@ -91,69 +91,79 @@
 
 - Most of our Code Reviews are based on GitHub Projects, GitHub Repositories and **GitHub Pull Request** feature
     - GitHub contains quite nice [documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/getting-started/about-collaborative-development-models) about PR-based code development and collaboration
-    - Note: Pull Requests are also commonly referred to as Merge Requests
+    - **Note:**Pull Requests are also commonly referred to as Merge Requests
 
 - TL;DR: Code development with Code Review goes as follows:
 
-> *Create Project->Describe the tasks->Make a branch->Write code->Make documentation and tests->Push code->Make Pull/Merge Request->Ask for Review->(Reviewer asks questions, makes comments or gives suggestions)->Work on suggestions/Reply to comments->Resubmit Review->...repeat as many times necessary...->Merge​ the code->Close ticket->...repeat as many times necessary...->Close the Project*
+> *Create repository->Create Project->Add ticket->Describe the tasks->Make a branch->Write code->Make documentation and tests->Push code->Make Pull/Merge Request->Ask for Review->(Reviewer asks questions, makes comments or gives suggestions)->Work on suggestions/Reply to comments->Resubmit Review->...repeat as many times necessary...->Merge​ the code->Close ticket->...repeat as many times necessary...->Close the Project*
 
 ### Details of Each Step
 
+**Note:** This is only a general description. Detailed steps are described in [GitHub Setup](./github_setup.md).
+
 #### 1. Create a GitHub Project and assign it an empty repository
 
+- Create an empty repository where you will store the code, documentation, and issues related to the project
+- When making a new repository, make an initial `Initial commit`, `First commit`, or `Initialize repo` commit with, for example, a README, and push the code. This is the only time you make a push directly to the `main` branch
+    - **Note:** You can also let GitHub to create and empty README/LICENSE when crating the repository
+        - This way, you can track your open PR and you enable Code Review based on PRs
+- **Avoid pushing any other code** to the `main` branch directly without a reviewed PR
+
+#### 2. Create a GitHub Project and assign it an empty repository
+
 - This sets up a dedicated space for your Project, ensuring all related work is organized and accessible
-- When making a new repository, make an initial *First commit* or *Initialize repo* commit with, for example, a README, and move all the subsequent development into a new branch right away
-    - This way, you enable Code Review based on PRs
-- **Avoid pushing any code** to the `main` branch without CR
+- GitHub project is used to track the overall development, store additional Issues info, track dependencies between Issues, and can be used to export a summary of your development
 
-#### 2. Define, describe and create Project Items (Issues and Sub-Issues)
+#### 3. Define, describe and create Project Items (Issues and Sub-Issues)
 
-- Outline the Project's objectives by breaking them down into manageable tasks (*features*) that all together complete the Project
+- Outline the Project's objectives by breaking them down into manageable tasks (*Issues*) that all together complete the Project
     - It helps you stay focused and aligned
     - It helps you to work more incrementally and better define the task at hand
     - It also makes it easier to collaborate on the Project
 - Try to keep the Items reasonably sized to make CR efficient - this translates to reasonably sized PRs
-- **Issues** (also called **Feature**s) are a bigger *chunk* of code, a functionality, a collection of Sub-issues/Subtasks, a complete functional **Feature** that can be added to the main code
+- **Issues** (also called **Features**) are a bigger *chunk* of code, a functionality, a collection of Sub-issues/Subtasks, a complete functional **Feature** that can be added to the main code
 - **Sub-Issue** (also called **Subtask**) is an individual step/implementation used to complete the feature
     - Feature doesn't always have to have subtasks
 - You can add new Items later if the Project develops while working on it
-- Note: Technically, you create an **Item** in the GitHub Project and it becomes an **Issue only** once you assign a repository it
+- **Note:** Technically, you create an **Item** in the GitHub Project and it becomes an **Issue only** once you assign a repository it (otherwise is stays as a `Draft`)
 - Give your Item names a proper prefix as described in [GitHub Best Practices - Ticket types](./github_best_practices.md##ticket-types)
 
-#### 3. Make a new branch from the `main` or the parent branch
+#### 4. Make a new branch from the `main` or the parent branch
 
 - Creating a separate branch for your work ensures that the `main` (~parent) branch remains stable and free from incomplete or experimental code until the development is done
 - First, make a Feature branch and then make a Subtask branch from the Feature branch as its parent
 - Give your Branch a proper name as described in [GitHub Best Practices - Branch Naming](./github_best_practices.md#branch-naming)
+- When creating a completely new branch and after pushing a first commit, create a `Draft` PR right away - see [7. Create and submit a GitHub Pull Request](#7-create-and-submit-a-github-pull-request)
+    - This way you can easily track your open development tasks
+    - **Note:** You change the PR to the *ready for review* when you are finished with the development
 
-#### 4. Work on the code based on the Tickets described in the GitHub Project
+#### 5. Work on the code based on the Tickets described in the GitHub Project
 
 - Following the predefined tasks ensures that all aspects of the Project are addressed systematically
-- Well-organized code is easier to review and maintain
+- Well-organized code is easier to review and maintain - see [Best Coding Practices](./best_coding_practices.md) and [Code Reproducibility](code_reproducibility.md)
 - Don't forget to organize your code properly as described in [Repository Structure](./repository_structure.md)
 - Don't forget to use the right commit message structure as described in [GitHub Best Practices - Commits](./github_best_practices.md#commits)
 
-#### 5. Document and test the code
+#### 6. Document and test the code
 
 - Code documentation and testing are important for verifying functionality and providing clear guidance for future Developers or collaborators
 - Document the main parts of the Project in README with clear instructions on why, what and how
-- If applicable, write tests (end-to-end tests, unit tests) or at least provide instructions on how to test the code and what should be the output
-    - See [Code Testing](./code_testing.md) for more information
+- If applicable, write tests (end-to-end tests, unit tests) or at least provide instructions on how to test the code and what should be the output - see [Code Testing](./code_testing.md) for more information
 
-#### 6. Create and submit a GitHub Pull Request
+#### 7. Create and submit a GitHub Pull Request
 
 - PRs can be drafted, reviewed, commented on, deleted, merged, shared
 - Keep the PR small
     - It's easier to review 100 lines of code than 1000 lines of code
     - The more lines of code, the more difficult it is for the Reviewer to understand and review the code
     - Large PRs slow down the CR, increase the number of overlooked errors, and decrease the morale
-- You can also make a **draft** PR request right at the time when you start working on a feature/subtask
+- You can also make a `Draft` PR request right at the time when you start working on a feature/subtask
     - It helps with keeping track of your open PRs (don't forget to assign yourself to the PR) if you have to switch between different projects
     - If that's the case, don't forget to mark the PR as *Draft* and use the `Draft:` prefix in the PR title
 - Don't forget to assign yourself to the PR so you are notified about the CR comments.
 - Give your PR the right title and commit message as described in [GitHub Best Practices - Pull Request](./github_best_practices.md#pull-request)
 
-#### 7. Ask for a Code Review (either a randomly selected or a specific person)
+#### 8. Ask for a Code Review (either a randomly selected or a specific person)
 
 - Requesting a Code Review from a colleague ensures that your code is checked for potential improvements and errors
 - Avoid asking "*Can anyone look at my PR, please*." - be specific
@@ -163,9 +173,10 @@
     - Anyone can unsubscribe at anytime
 - Avoid adding changes to the PR once you request the Code Review - it is difficult for the Reviewer to review code that keeps changing
     - If you must change the code, inform the Reviewer you will add more changes
-- Some more info on GitHub Pull Requests [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/requesting-a-pull-request-review).
+- Some more info on GitHub Pull Requests and how to request a CR [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/requesting-a-pull-request-review)
+- More details about the CR can be found in [GitHub Best Practices/Pull Request Review as a Developer](./github_best_practices.md#pull-request-review-as-a-developer)
 
-#### 8. The Reviewer asks questions about the code or makes suggestions
+#### 9. The Reviewer asks questions about the code or makes suggestions
 
 - This step involves a detailed examination of the code, with the Reviewer providing constructive feedback
     - Reviewer reads the Project description, tests the code, adds comments or suggestions
@@ -175,10 +186,11 @@
     - Code following the best practices with tests makes this much easier for the Reviewer
 - Once done with the Review, the Reviewer informs the Developer so it's clear this step of the Review is done
 - Align with the Reviewer if you want to start implementing suggestions while the Review is still in progress for the same reasons as in point no. 7
+- More details about the CR can be found in [GitHub Best Practices/Pull Request Review as a Reviewer](./github_best_practices.md#pull-request-review-as-a-reviewer)
 
 ##### How to comment on the PR
 
-1) **On GitHub as part of the PR** - visible for everyone; traceable; least personal
+1. **On GitHub as part of the PR** - visible for everyone; traceable; least personal
 
 - **Pros**:
     - Other people can see the comments and react
@@ -190,7 +202,7 @@
     - People might be shy and might not feel comfortable with everyone seeing comments on their code
     - Might sometimes sound harsher than intended (no language *tone* feeling from the text) - be respectful
 
-2) **On Teams (DM)** – only one person can see it​; somehow personal
+2. **On Teams (DM)** – only one person can see it​; somehow personal
 
 - **Pros**:
     - Personal and confidential​
@@ -202,7 +214,7 @@
     - All the changes have to be manual (no Suggestions)
     - It can lead to fragmented communication if multiple reviewers are involved
 
-3) **Personal discussion** – only one person can hear it​; very personal
+3. **Personal discussion** – only one person can hear it​; very personal
 
 - **Pros**:
     - Very personal
@@ -212,7 +224,7 @@
     - Might be more time consuming
     - More difficult to schedule
     - It can lead to fragmented communication if multiple reviewers are involved
-- Note: Document key decisions in the PR comments for both On Teams (DM) and Personal discussion for future references
+- **Note:**Document key decisions in the PR comments for both On Teams (DM) and Personal discussion for future references
 
 ##### GitHub Comments vs. Suggestions
 
@@ -232,7 +244,7 @@ To summarize:
 - `Files changed` tab -> `Review changes` -> `Comment` is similar to a general PR comment
 - `Files changed` tab -> `Review changes` -> `Approve` is similar to a general PR comment
 
-#### 9. Implement/discuss the PR comments
+#### 10. Implement suggestions/discuss the PR comments
 
 - Same as in point no. 8 - reacting on comments and/or suggestions can be either done on GitHub, Teams, or in person and the same rules apply here as well
     - For GitHub discussions - addressing the feedback collaboratively helps improve the code and ensures that all team members are on the same page
@@ -242,27 +254,27 @@ To summarize:
 - Inform the Reviewer once you implement all the changes
     - The Reviewer resolves the threads or adds more comments if not satisfied
     - **The threads should be only resolved by the Reviewer** (~creator) of the thread
-- Don't forget to `git pull` locally once you apply the suggestions on GitHub!
+- Don't forget to `git pull` locally once you apply the suggestions on GitHub or use GitHub *edit/commit functionality*!
 
-#### 10. Resubmit for Review, inform the Reviewer, and repeat until done
+#### 11. Re-request the Review, inform the Reviewer, and repeat until done
 
 - Iterative Reviews ensure that all feedback is addressed and the code meets the required standards
 - Repeat as many times as necessary, following the same steps as described above
 
-#### 11. Reviewer approves the PR
+#### 12. Reviewer approves the PR
 
 - Once the Reviewer is happy with the changes, they can approve the PR, indicating that the code is ready to be merged
 - All the open threads/comments/suggestions should be closed
 - Technically, anyone can approve the PR **but** the author(s) of the code
     - This ensures we used the **Second Set of Eyes** principle
 
-#### 12. Publish the code by merging it into the target branch
+#### 13. Publish the code by merging it into the target branch
 
 - Merging the approved code into the target branch makes it part of the main codebase, ready for deployment or further development
 - **Merge should only be done by the author of the PR**
-- Don't forget to `git pull` locally once you merge the PR!
+- Don't forget to `git checkout <target_branch>` and `git pull` locally once you merge the PR!
 
-#### 13. Close the ticket and repeat until the Project is finished and close the Project
+#### 14. Close the ticket and repeat until the Project is finished and close the Project
 
 - Happy Code Review!
 

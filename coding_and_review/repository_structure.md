@@ -12,7 +12,7 @@
 - **`README.md`** - description of the project and analyses with instructions on how to reproduce the analysis, including but not limited to how to get the input data, build databases and references, create necessary environments, run the analysis, output files description, etc.
 - **`LICENSE.txt`** - licensing information
 - **`.git`** - `git` files and configs
-- **`.github/workflows`** - GitHub actions instructions to  automate testing and deployment
+- **`.github/workflows`** - GitHub Actions instructions to  automate testing and deployment
 - **`.gitignore`** - `.gitignore` file
     - Following directories/files are commonly included: `bin`, `data`, `logs`, `notebooks`, `publication`, `reports`, `results`
 - **`bin`** - additional binaries that are not installed through `conda` or virtual environments or are not run through `Docker`/`Apptainer`. Instruction on installing additional software to `bin` should be described in `run/run_build_envs.sh` or `envs`
@@ -57,7 +57,7 @@
 - **`tests`** - end-to-end and unit tests for the project code
 - **`tmp`** - temporary files generated during the analysis; these files can be deleted
 
-Note: For research-heavy projects where we don't have an *exact flow* of the code, it's a good idea to prefix your script names with `01_`, `02_`, `03_` to highlight the order scripts in the analysis/exploration.
+**Note:**For research-heavy projects where we don't have an *exact flow* of the code, it's a good idea to prefix your script names with `01_`, `02_`, `03_` to highlight the order scripts in the analysis/exploration.
 
 ## `snakemake`
 
@@ -79,7 +79,7 @@ Note: For research-heavy projects where we don't have an *exact flow* of the cod
 - For should use Latin name for the organisms unless agreed otherwise
 - Use: `<organism_latin_name>/<genome_version>/<source_database_and_version>/<reference_file>`
     - For example: `homo_sapiens/hg38/UCSC/genome.fa`
-- Note: Not all databases have to have `...and_version>`
+- **Note:**Not all databases have to have `...and_version>`
 - Keep the original file name and link it to a *simple* final file name
     - For example, for human reference based on UCSC `hg38`, make `homo_sapiens/hg38/UCSC` directory, download the original file from [UCSC](https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz) to `homo_sapiens/hg38/UCSC/` and (optional) soft-link it to the final `genome.fa.gz`
     - The directory then contains the original downloaded file name (`hg38.fa.gz`) and the final reference name to use in the analysis, `genome.fa.gz`
@@ -93,7 +93,7 @@ Note: For research-heavy projects where we don't have an *exact flow* of the cod
 - Put indexes into the same reference directory as stated on the [top of the paragraph of References Structure](#references-structure)
 - Use: `<tool_name_with_version/<index_settings>/<index_file>`
     - For example, `STAR_2.7.4a/150bp_splice/SAindex
-- Note: Some tools don't have `<index_settings>`
+- **Note:**Some tools don't have `<index_settings>`
 - Exceptions are indexes that are very common and should be in the same directory as the reference
     - For example, `samtools faidx genome.fa` output `genome.fa.fai` or, `tabix genes.gtf.gz` gene annotation output `genes.gtf.gz.tbi` should be in the *main* directory as `genome.fa` or `genes.gtf.gz` respectively
 
@@ -103,4 +103,20 @@ Note: For research-heavy projects where we don't have an *exact flow* of the cod
 
 ### Docker/Apptainer Images
 
-- TODO
+- If our pipelines are based on Docker/Apptainer images, where each command (or step) uses a single image, we can use a single shared directory
+- We don't have to build an image from scratch, as there are multiple hubs from which we can download pre-compiled images:
+    - [seqera.io](https://seqera.io/containers/): Build your own images from PyPI, bioconda, and conda-forge
+    - [biocontainers](https://quay.io/organization/biocontainers) ([homepage](https://biocontainers.pro/registry) and [GitHub page](https://github.com/BioContainers/containers)): Prebuilt images; Contains all available conda packages as images and other bioinformatics tools images
+    - Also available on [Dockerhub](https://hub.docker.com/u/biocontainers)
+    - [Galaxy project](https://depot.galaxyproject.org/singularity/) - Prebuilt images
+    - [Dockerhub](https://hub.docker.com/search) - general Docker images hub
+    - [Sylab](https://cloud.sylabs.io/library) - general Singularity images hub
+    - [Singularity hub](https://singularityhub.github.io/) - general Singularity images info
+- Shared Apptainer/Singularity images are saved:
+    - On Isilon: `${HOME}/bioinf_isilon/core_bioinformatics_unit/Public/singularity_images`
+    - On CeMM: `/nobackup/lab_ccri_bicu/public/apptainer_images`
+- Please, write down from where you downloaded the image or how you built it in the respective shared directories in `run.sh`
+    - This file can be `git` tracked and reused, redownload the image if necessary, or used for the manuscript methods section
+- To make sharing possible, we must keep a certain image naming structure.
+    - [Galaxy project](https://depot.galaxyproject.org/singularity/) images: `<tool_name>-<version>--<commit_hash>_<image_build_version>.sif` (for example, `falco-1.2.5--h077b44d_0.sif`), which is then linked to `depot.galaxyproject.org-singularity-falco-1.2.5--h077b44d_0.img` to make it compatible with Nextflow
+    - Minimal custom built images: `<tool_name>-v<tool_version>.sif`
