@@ -1,7 +1,7 @@
 # Best Coding Practices Guidelines
 
 - Writing good code matters - it is better for you, your colleagues, and your collaborators
-    - This doesn't only apply when it comes to the [Code Review](./code_review.md) but to the overall code quality
+    - This doesn't only apply when it comes to the [Code Review](./code_review.md), but to the overall code quality
 
 ![Code quality](./figures/code_quality.png)
 
@@ -13,19 +13,19 @@
     - They lower the chance of making a typo error when reusing the code in multiple sections
     - Functions are not only about code repetition - functions can be [Unit Tested](./code_testing.md#unit-tests)
 - Use **configs** wherever possible
-    - Try to avoid settings parameters and variables, especially the repeating ones, directly in the scripts
+    - Try to avoid setting parameters and variables, especially the repeating ones, directly in the scripts
     - For example, you can use `YAML`-based config files and parse them [`yq`](https://github.com/mikefarah/yq) inside your shell scripts (see an [example](#parsing-config-files-with-yq) below)
-    - You can also use a simple `config.sh` file with common variables assignment and `source config.sh` from within your shell scripts
-- Choose **one version** of your development environment - R, Python, other programming languages, software tools, and base Docker image, and use them as much as possible
+    - You can also use a simple `config.sh` file with common variable assignments and `source config.sh` from within your shell scripts
+- Choose **one version** of your development environment - R, Python, other programming languages, software tools, and a base Docker image, and use them as much as possible
     - This makes it easier to reuse code in your other projects or by your colleagues
 - **Minimize the use of comments** in the code - Let the code speak for itself by choosing proper variable and function names
     - Notes worth keeping could be included in the README or NOTES, not in the code
     - Avoid unexplained commented *run* code in the scripts
-    - Of course, you can keep comments explaining the reasons of why this command was used and some alternative, the racionale for the chosen settings, etc.
-        - This might especially useful in research, data analysis-heavy, or novel code
+    - Of course, you can keep comments explaining why this command was used and some alternative, the rationale for the chosen settings, etc.
+        - This might be especially useful in research, data analysis-heavy, or novel code
 - **Don't keep unused code**
-    - Keep only used and relevant code relevant in the final version
-    - Unnecessary code makes it harder to read, it is more difficult to maintain and draws focus away from the most important sections
+    - Keep only the used and relevant code in the final version
+    - Unnecessary code makes it harder to read, it is more difficult to maintain, and draws focus away from the most important sections
 - Use **`git` commit history** if you need to go back or revert changes
     - For example, one of the options is to remove the comments in one of the very last commits before the merge if you really want to keep your comments with the code. You can always go back to that commit and see them. The same applies to the unused code you want to *remember*
 - Keep an **empty newline at the end** of your scripts/configs
@@ -45,20 +45,20 @@
     - Name the variables based on what information they hold
     - Name the scripts based on what they run
 - Use the correct naming style based on the language and type of object:
-    - **Snake Case**: Words are separated by underscores, and all letters are usually lowercase (e.g., `user_id`, `first_name`) - used for variables. There's also a variant called "screaming snake case" where all letters are uppercase (e.g., `USER_ID`) - used for constants (~global variables). Commonly used in: Python and shell scripting.
+    - **Snake Case**: Words are separated by underscores, and all letters are usually lowercase (e.g., `user_id`, `first_name`) - used for variables. There's also a variant called "screaming snake case", where all letters are uppercase (e.g., `USER_ID`) - used for constants (~global variables). Commonly used in: Python and shell scripting.
     - **Camel Case**: The first word is lowercase, and each subsequent word starts with an uppercase letter (e.g., `userId`, `firstName`). Commonly used in: Java and C++ for variable and function names.
     - **Pascal Case**: Similar to camelCase, but the first letter of each word is capitalized, including the first word (e.g., `UserId`, `FirstName`). Commonly used in Java and C++ for class names and sometimes for method names.
     - **Kebab Case**: Words are separated by hyphens, and all letters are lowercase (e.g., `user-id`, `first-name`). It is not very common except for URLs for CSS class names and HTML IDs.
 
 ## Code Styling
 
-- Everybody has a different *coding style* - code structure and aesthetics
+- Everybody has a different *coding style* - code structure, and aesthetics
 - To avoid unnecessary confusion and possible conflicts, we follow certain code styling guidelines
 
 ### Shell
 
 - [Shell code styling practices from Google](https://google.github.io/styleguide/shellguide.html)
-    - **Note:**Google has​ other styleguides and best coding practices recommendation for many other [languages](https://google.github.io/styleguide/)
+    - **Note:** Google has​ other styleguides and best coding practices recommendations for many other [languages](https://google.github.io/styleguide/)
 - Additional best practices [here](https://medium.com/codecuriosity/shell-script-best-practices-048696404b3a) (PDF version [here](./examples/Shell_Script_Best_Practices_Neuro_Bytes_CodeCuriosity_Oct,_2024_Medium.pdf))
 - Another nice (and short) summary [here](https://bertvv.github.io/cheat-sheets/Bash.html)​
 - Set `set -ueo pipefail` on the top of your bash scripts to capture unset variables, error codes, etc.
@@ -66,7 +66,7 @@
 - Quote variables to prevent word-splitting
 - Don't put passwords and
 - **Note:** Use `#!/bin/bash -x` or `#!/bin/bash -v` for debugging
-    - **Note:**You can also use `bash -x my_script.sh` or `bash -c my_script.sh` to run the scripts to get the same outcome
+    - **Note:** You can also use `bash -x my_script.sh` or `bash -c my_script.sh` to run the script to get the same outcome
 
 ### R
 
@@ -76,7 +76,7 @@
 ### Python
 
 - We follow [PEP 8 code formatting](https://peps.python.org/pep-0008/) - widely accepted and the industry standard
-    - **Note:**`black` with `isort` we use for code styling follow [PEP 8 formatting](https://github.com/psf/black?tab=readme-ov-file#the-black-code-style) (see [Code Editors Formatters](#code-editors-formatters))
+    - **Note:** `black` with `isort` we use for code styling follows [PEP 8 formatting](https://github.com/psf/black?tab=readme-ov-file#the-black-code-style) (see [Code Editors Formatters](#code-editors-formatters))
 - **Note:** Python equivalent of `bash -x` is `python3 -m trace -t myscript.py`
 
 ### Markdown
@@ -108,12 +108,12 @@
     - shell: [foxundermoon.shell-format](https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format)
     - Python: [ms-python.black-formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter) together with [ms-python.isort](https://marketplace.visualstudio.com/items?itemName=ms-python.isort)
     - `snakemake`: [tfehlmann.snakefmt](https://marketplace.visualstudio.com/items?itemName=tfehlmann.snakefmt)​
-    - `nextflow`; [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode); **Note:**`nextflow` offers VS Code extension [nextflow.nextflow](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow) for syntax highlighting, completion, and error checking (more information [here](https://nf-co.re/docs/contributing/code_editors_and_styling/code_formatting) and [here](https://nf-co.re/docs/guidelines/documentation/writing_style))
+    - `nextflow`; [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode); **Note:** `nextflow` offers VS Code extension [nextflow.nextflow](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow) for syntax highlighting, completion, and error checking (more information [here](https://nf-co.re/docs/contributing/code_editors_and_styling/code_formatting) and [here](https://nf-co.re/docs/guidelines/documentation/writing_style))
     - Markdown: [DavidAnson.vscode-markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)​
     - Dockerfile: [ms-azuretools.vscode-docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)​
     - YAML: [redhat.vscode-yaml](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)​
     - JSON: default VS Code JSON features `vscode.json-language-features`
-- See the [example](#shell-code-formatting-upon-save) below on how to automate the code formatting as [git pre-commit hook](#git-pre-commit-hooks-for-code-formatting-and-linting)
+- See the [example](#shell-code-formatting-upon-save) below on how to automate the code formatting as a [git pre-commit hook](#git-pre-commit-hooks-for-code-formatting-and-linting)
 
 ##### Vim/NeoVim Code Formatters
 
@@ -123,9 +123,9 @@
 
 - RStudio offers some code stylers as well:
     - R: [`air`](https://github.com/posit-dev/air)
-        - Atm, `air` has to be installed as an [external formatter](https://posit-dev.github.io/air/editor-rstudio.html) in RStudio but it's much faster than `{styler}`
+        - Atm, `air` has to be installed as an [external formatter](https://posit-dev.github.io/air/editor-rstudio.html) in RStudio, but it's much faster than `{styler}`
         - It also follows the `tidyverse` styling guide (with minor deviations)
-        - **Note:**It can be also used from a command line and setting up git pre-commit hooks is much easier than `{styler}`
+        - **Note:** It can also be used from a command line, and setting up git pre-commit hooks is much easier than `{styler}`
     - R: {[`styler`](https://styler.r-lib.org/index.html)}
         - Assign a keyboard shortcut in RStudio and use it before a commit
         - Alternatively, `{styler}` can be included in [git pre-commit hook](#git-pre-commit-hooks-for-code-formatting-and-linting) using [{precommit}](https://github.com/lorenzwalthert/precommit) package
@@ -140,9 +140,9 @@
 
 ### Code Linters
 
-- As well as code formatters, linters can be used within the code editor, from the command line or as part of the git pre-commit hook:
+- As well as code formatters, linters can be used within the code editor, from the command line, or as part of the git pre-commit hook:
     - shell: [shellcheck](https://github.com/koalaman/shellcheck)
-        - Available as both command-line tool and VS Code add-in: [timonwong.shellcheck](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
+        - Available as both a command-line tool and a VS Code add-in: [timonwong.shellcheck](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
     - R: {[lintr](https://github.com/r-lib/lintr)}
     - `snakemake`: `snakemake --lint`; more info [here](https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html)
     - `nextflow`: `nf-core pipelines lint`; more info [here](https://nf-co.re/docs/guidelines/pipelines/requirements/linting) and [here](https://nf-co.re/docs/nf-core-tools/pipelines/lint)
@@ -156,9 +156,9 @@
     - As a result, the code is formatted before the commit, avoiding the necessity to `--amend` the commit due to formatting inconsistencies
     - The same applies to linting
 - You can set pre-commit hooks manually, but it's much easier to use [pre-commit](https://pre-commit.com/)
-    - Example on how to setup pre-commit hook for `nextflow` using `prettier` [here](https://nf-co.re/docs/contributing/code_editors_and_styling/code_formatting#running-with-pre-commit)
+    - Example on how to set up pre-commit hook for `nextflow` using `prettier` [here](https://nf-co.re/docs/contributing/code_editors_and_styling/code_formatting#running-with-pre-commit)
 - **Note:** `git pre-commit` hooks **don't** have to be applied **only** to code **formatting or linting** - you can use them for any git-related actions
-- **Note:** Some code editors' UI git commit functionality does not fully support git hooks and you have to `--amend` or run the tools separately
+- **Note:** Some code editors' UI git commit functionality does not fully support git hooks, and you have to `--amend` or run the tools separately
 
 ## GitHub Actions
 
@@ -175,7 +175,7 @@
     - [GitHub Copilot Code Review](https://docs.github.com/en/copilot/how-tos/agents/copilot-code-review/configuring-automatic-code-review-by-copilot)
     - [Or custom GitHub Actions](https://gist.github.com/bradenkeith/e25914ba3150d7bb575f7ccc7eb24767).
 
-[More examples of GitHub Action and summaries](https://codex.so/github-actions-intro-en).
+[More examples of GitHub Actions and summaries](https://codex.so/github-actions-intro-en).
 
 ## Examples
 
@@ -196,11 +196,11 @@ yq eval '.name' config.yaml
 # John Doe
 ```
 
-- **Note:**Don't install `yq` with `conda`. `conda` only contains a very old version of `yq` (v3.4.3; current is v4.44.5). Installing it directly from [GitHub](https://github.com/mikefarah/yq?tab=readme-ov-file#install) is better.
+- **Note:** Don't install `yq` with `conda`. `conda` only contains a very old version of `yq` (v3.4.3; current is v4.44.5). Installing it directly from [GitHub](https://github.com/mikefarah/yq?tab=readme-ov-file#install) is better.
 
 ### Python Code Formatting `git pre-commit` Hook
 
-The following git pre-commit hooks will run `isort`+`black` automatically **for all the Python scripts in the repository** before `git commit`. It is executed centrally for all the git repos. You can still set your local git repo hooks separately and it will run both of them.
+The following git pre-commit hooks will run `isort`+`black` automatically **for all the Python scripts in the repository** before `git commit`. It is executed centrally for all the git repos. You can still set your local git repo hooks separately, and it will run both of them.
 
 To autoformat Python code **before** `git commit`, you can do the following:
 
@@ -231,11 +231,11 @@ git config --global core.hooksPath /home/${USER}/.git/hooks
 
 The following git pre-commit hooks will run [`air`](https://github.com/posit-dev/air) automatically **only for git staged R scripts** before `git commit`.
 
-**Note:** For more info on how to set up the git hooks see the [Python Code Formatting `git pre-commit` Hook](#python-code-formatting-git-pre-commit-hook).
+**Note:** For more info on how to set up the git hooks, see the [Python Code Formatting `git pre-commit` Hook](#python-code-formatting-git-pre-commit-hook).
 
-See To autoformat R code **before** (=pre) `git commit`, you can put the example [R pre-commit code](examples/pre-commit_R) to your `~/.git/hooks/pre-commit` (`air` has to be installed in your base `conda` environment or on your system).
+To autoformat R code **before** (=pre) `git commit`, you can put the example [R pre-commit code](examples/pre-commit_R) to your `~/.git/hooks/pre-commit` (`air` has to be installed in your base `conda` environment or on your system).
 
-**Note:** If you use `ShellCheck` extension in VS Code, you might have to add `# shellcheck disable=SC2086` above **each** of the lines you don't want to be quoted automatically.
+**Note:** If you use the `ShellCheck` extension in VS Code, you might have to add `# shellcheck disable=SC2086` above **each** of the lines you don't want to be quoted automatically.
 
 ### `snakemake` Code Formatting `git pre-commit` Hook
 
@@ -247,7 +247,7 @@ Following the [Python](#python-code-formatting-git-pre-commit-hook) and [R forma
 
 1. Open User settings at *Search* -> *Show and Run Commands* -> *>Preferences: Open User Settings (JSON)*
 2. If you haven't changed any settings so far, this file might be empty. In that case, you have to *initiate* the JSON list with `{}`
-3. Paste this for shell script autoformatting on save and to automatically use four spaces instead of tab:
+3. Paste this for shell script autoformatting on save and to automatically use four spaces instead of tabs:
 
 ```json
 "[shellscript]": {

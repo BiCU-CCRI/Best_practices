@@ -4,7 +4,7 @@
 
 This documentation aims to standardize coding practices, improve code quality, and streamline collaboration within the Bioinformatics Core Unit (BiCU) at St. Anna CCRI and with its collaborators.
 
-It serves as a practical guideline for existing and new BiCU members. It is focused on but not limited to best coding practices in bioinformatics.
+It serves as a practical guideline for existing and new BiCU members. It is focused on, but not limited to, best coding practices in bioinformatics.
 
 The documentation describes:
 
@@ -18,11 +18,11 @@ The documentation describes:
 
 ## Glossary
 
-- There are some differences between naming things in *regular* code development environment and on GitHub
-    - **Note: **[GitLab](https://about.gitlab.com/) is more consistent with the standard development jargon
+- There are some differences between naming things in a *regular* code development environment and on GitHub
+    - **Note:** [GitLab](https://about.gitlab.com/) is more consistent with the standard development jargon
 - The following terms are interchangeable:
-    - **Ticket** – GitHub Project Item; turns into GitHub Issue when assigned to a Repository; A general description for a task (Feature, Subtaks, ...).
+    - **Ticket** – GitHub Project Item; turns into GitHub Issue when assigned to a Repository; A general description for a task (Feature, Subtasks, ...).
     - **Issue** - GitHub Issue; a general *task* that can be worked on or *instructions* on how to achieve something. GitHub uses Issues and Sub-issues.
     - **Merge Request** - GitHub Pull Request; PR; request to merge a development branch code into a parent branch
     - **Code Review** - CR; a process of reviewing the code by your peers
-    - **`main` branch** - sometimes called `default` or `production` branch; somethimes called `master` in the past
+    - **`main` branch** - sometimes called `default` or `production` branch; sometimes called `master` in the past

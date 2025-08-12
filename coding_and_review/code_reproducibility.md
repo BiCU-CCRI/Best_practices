@@ -1,22 +1,22 @@
 # Code Reproducibility Guidelines
 
-- Code reproducibility is an important part of the code development
+- Code reproducibility is an important part of code development
 - Since we use various development environments, we have to do our best to make the environments and code as reproducible as possible
 - The most important thing is - **document everything**
     - This includes downloading databases, making references, setting up the environment, and *how-to* run the analysis or pipelines, etc.
 - In an optimal case, we would use container images wherever possible - these are the closest things we can use for true code reproducibility
 - **Avoid using locally** installed software on the server in your user directory
     - They are usually tailored to the particular machine, and we do not have information about how they were installed, the dependencies, the exact version, etc.
-    - This includes pre-installed packages on the CeMM cluster. It is very difficult to reproduce the environment on other machines but the CeMM cluster, such as when CeMM updates their servers to a different operating system, hardware, etc.
-    - It is ok to use common Unix command-line tools, but even here, you have to be careful - not all Unix-based operating systems are built the same and follow the best practices (looking at you, MacOS) and they often do not have the same software versions (again, looking at you, MacOS)
+    - This includes preinstalled packages on the CeMM cluster. It is very difficult to reproduce the environment on other machines but the CeMM cluster, such as when CeMM updates their servers to a different operating system, hardware, etc.
+    - It is ok to use common Unix command-line tools, but even here, you have to be careful - not all Unix-based operating systems are built the same and follow the best practices (looking at you, MacOS), and they often do not have the same software versions (again, looking at you, MacOS)
 - Control version of **everything**
     - Document your **code** and **documentation history** - version control (in our case, git and GitHub; other possibilities are [GitLab](https://about.gitlab.com/) or [Bitbucket](https://bitbucket.com/)) as well as the **software version** you are using
         - For non-standard software, track the software version as detailed as possible - [Zenodo](https://zenodo.org/)/[Figshare](https://figshare.com/) DOIs, download links, git commits hashes, GitHub releases, versions, tags
     - Keep in mind the developers can change the releases, update tags, or delete the software completely - in such cases, it's a good idea to make a local copy and include this in the `git`
         - It is safer to use Zenodo/Figshare DOIs because these don't change after they are published and are hosted on an independent platform (sort of) - it is more difficult to remove the code
-        - On GitHub, for example, the code owner can rename the repository, delete it, change tags, etc., but also other *called* dependencies can be deleted, broken links, etc. - getting code from GitHub is not a safe way for reproducible and version-controlled code development
+        - On GitHub, for example, the code owner can rename the repository, delete it, change tags, etc., but also other required dependencies can be deleted, broken links, etc. - getting code from GitHub is not a safe way for reproducible and version-controlled code development
     - If, for some reason, you struggle with using a specific software version combination, keep the version for the most essential tools and remove the version or the *not-so-critical* software (for example, recording the `wget` version might not be as crucial as `bwa`) - use with caution!
-        - This is especially applies to `conda` environments and version clashes between software dependencies
+        - This especially applies to `conda` environments and version clashes between software dependencies
 
 ## High-level Host Information
 
@@ -27,9 +27,9 @@
     - `apptainer --version`
     - `conda --version`
 - Record the status of the *actual* development environment as part of the output/environment files:
-    - R: `sessionInfo()` (at the end of the R script) save the list of loaded packages and their versions and use `{renv}` `.lock` file
-    - `conda`: `conda env export --no-builds > environment.yml` to export all the installed software versions including automatically installed dependencies or `conda env export --from-history > environment.yml` to export only *manually* installed software versions. **Note:** You can also combine the two commands
-        - **Note: **`conda`: `conda env export > environment.yml` to export **detailed** software version (and very specific system-build subversions) including builds in the current `conda` environment
+    - R: `sessionInfo()` (at the end of the R script) saves the list of loaded packages and their versions. Or, use `{renv}` `.lock` file
+    - `conda`: `conda env export --no-builds > environment.yml` to export all the installed software versions, including automatically installed dependencies, or `conda env export --from-history > environment.yml` to export only *manually* installed software versions. **Note:** You can also combine the two commands
+        - **Note:** `conda`: `conda env export > environment.yml` to export **detailed** software version (and very specific system-build subversions), including builds in the current `conda` environment
 
 ## Docker, Apptainer, Singularity Images
 
@@ -39,9 +39,9 @@
     - For example, [buildah](https://github.com/containers/buildah), [podman](https://podman.io/), [charliecloud](https://hpc.github.io/charliecloud/index.html), [kaniko](https://github.com/GoogleContainerTools/kaniko), [Fakeroot for Apptainer](https://apptainer.org/docs/user/main/fakeroot.html), or [Rootless mode for Docker](https://docs.docker.com/engine/security/rootless/) (not recommended)
 - On systems supporting Docker/Apptainer images, we might encounter container/image management problems
     - Both Docker and Apptainer tend to keep many temporary, dangling images, unused containers, cache files, etc, causing storage space issues
-    - **Note: **[kubernetes](https://kubernetes.io/) is the industry standard for large-scale container management that can handle a lot of management issues
+    - **Note:** [kubernetes](https://kubernetes.io/) is the industry standard for large-scale container management that can handle a lot of management issues
 - Containers can also be run remotely on the cloud
-    - Properly set `Dockerfile/.def` files can be used to create [IDE container-based cloud environments](https://www.youtube.com/watch?v=bHhYBt1BYaU) in [GitHub Codespaces](https://github.com/features/codespaces/), [Gitpod](https://www.gitpod.io/) or [Devpod](https://devpod.sh/)
+    - Properly set `Dockerfile/.def` files can be used to create [IDE container-based cloud environments](https://www.youtube.com/watch?v=bHhYBt1BYaU) in [GitHub Codespaces](https://github.com/features/codespaces/), [Gitpod](https://www.gitpod.io/), or [Devpod](https://devpod.sh/)
     - These make it much easier to run, test, and distribute the code because everybody recreates the environment *from scratch* on an independent system
     - The environments can be accessed by multiple users from different access points, making it very easy to use and interact with
 - Keep a certain level of granularity - it is often better to have multiple smaller images than one large one
@@ -49,7 +49,7 @@
 ### Base Image
 
 - It is beneficial to decide on **one primary base image** and use it as often as possible
-    - The same applies to other development environment, such as R
+    - The same applies to other development environments, such as R
 - Optimally, the base image(s) should be supported by [GitHub hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for--private-repositories) to provide future compatibility with testing
 - When specifying base images, prefer [`sha256` digest method](https://docs.docker.com/reference/cli/docker/image/pull/#pull-an-image-by-digest-immutable-identifier) (also called **pins**) over image tags
     - This is much more *stable* than using Dockerhub tags - tags can be updated, changed, or deleted by the author
@@ -86,11 +86,11 @@ FROM rocker/tidyverse:4.4
 
 #### System Packages
 
-- Keep the added software dependencies **including the specific versions** in the [**`packages.txt`**](examples/packages.txt) file including the software versions
+- Keep the added software dependencies, including **the specific versions** in the [**`packages.txt`**](examples/packages.txt) file, including the software versions
 - In Linux, prefer **`release`** (**`main`** or **`universe`** with **no *prefix***) software versions - these are *frozen* and do not change in additional releases
-    - **Note: **`security`,  `updates`,  `proposed`, and  `backport` might change over time
+    - **Note:** `security`,  `updates`,  `proposed`, and  `backport` might change over time
         - More information about the differences [here](https://askubuntu.com/a/1280725/1013568)
-- To get the right software version (`release` - `main` or `universe`), you can search `apt-get update` caches in the interactively open Docker container
+- To get the right software version (`release` - `main` or `universe`), you can search for `apt-get update` caches in the interactively open Docker container
     - For `python3`, the desired package version in `Ubuntu 22.04 LTS` is **`python3=3.10.4-0ubuntu2`**:
 
 ```shell
@@ -108,10 +108,10 @@ Reading package lists... Done
    python3 | 3.10.4-0ubuntu2 | http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages # USE this one - main (~release) package
 ```
 
-- Sometimes, you have **collisions** in package versions and you have to specify additional software versions
+- Sometimes, you have **collisions** in package versions, and you have to specify additional software versions
     - This has to be done manually based on the output of the `apt-get install` command
     - If this still doesn't work, you can add `--allow-downgrades` to the `apt-get install` command, but you should try to avoid this if possible
-- **Do not** install system recommended but unused packages
+- **Do not** install system-recommended but unused packages
     - Use **`--no-install-recommends`** as part of the `apt-get install` command
 - Copy the `packages.txt` file during the build and install the additional software with:
 
@@ -137,8 +137,8 @@ RUN pip3 install --upgrade pip && \
 #### Other Software
 
 - Keep all the additional software (not included in the standard repos, not part of Python or R requirements in a separate file [**`soups.txt`**](./examples/soups.txt)
-    - **Note: **SOUP = [**SO**ftware of **U**nknown **P**edigree](https://en.wikipedia.org/wiki/Software_of_unknown_pedigree)
-- Installing is more elaborate, but you can use for example:
+    - **Note:** `SOUP` = [**SO**ftware of **U**nknown **P**edigree](https://en.wikipedia.org/wiki/Software_of_unknown_pedigree)
+- Installing is more elaborate, but you can use, for example:
 
 ```dockerfile
 RUN bcftools_version=$(grep -w bcftools /soups.txt | cut -d "=" -f2) && \
@@ -162,12 +162,12 @@ RUN bcftools_version=$(grep -w bcftools /soups.txt | cut -d "=" -f2) && \
 ## Conda
 
 - `conda` (or `mamba`) is a great tool to quickly create development environments
-- Unfortunately, `conda` is not particularly good in reproducible and transferable environment setups as it heavily depends on the host environment and uses many host files (libraries)
+- Unfortunately, `conda` is not particularly good in reproducible and transferable environment setups, as it heavily depends on the host environment and uses many host files (libraries)
 - We can improve on this by using *strict* settings while setting up `conda` environments
 
 ### Environment Settings Recommendations
 
-- Here are some recommendations to make `conda` environments setup more robust:
+- Here are some recommendations to make the `conda` environment setup more robust:
 
  1. **Disable** `conda` **auto-updates** `conda config --set auto_update_conda false`
  2. Set **strict channel priority** for the `base` environment (see example below) or install with `conda` channels directly in the command line `--strict-channel-priority --override-channels -c conda-forge -c bioconda`
@@ -185,38 +185,38 @@ conda config --set channel_priority strict
  3. **Prefer online packages** instead of local ones `conda config --set offline false`
  4. Keep the original `conda create` command with installed package versions
 
-- Exported `conda` environment `YAML` is often very host-specific and it is not possible to reproduce the environment on a different host
+- Exported `conda` environment `YAML` is often very host-specific, and it is not possible to reproduce the environment on a different host
 
  5. Set `conda` to **copy packages** instead of linking them from another environment with `conda config --set always_copy true` or by adding `--copy` to `conda create`
 
-- This is more to help with `conda` environment installation breaking while updating some other `conda` packages during the development
+- This is more to help with the `conda` environment installation breaking while updating some other `conda` packages during the development
 
 ## R
 
 - Consider using [`{renv}`](https://rstudio.github.io/renv/articles/renv.html) for independent reproducible R software environments
-    - For example, you can have a single standardized R docker image with `{renv}`, install and track packages with `{renv}` for each project. Once the project is done and you need to preserve the software versions, you can create a separate docker image with all the software preinstalled
-    - **Note: **Not all R packages are always preserved and sometimes they are even removed from CRAN/Bioconductor - only using `{renv}` is **not enough** for future reproducibility
+    - For example, you can have a single standardized R docker image with `{renv}`, install and track packages with `{renv}` for each project. Once the project is done and you need to preserve the software versions, you can create a separate Docker image with all the software preinstalled
+    - **Note:** Not all R packages are always preserved, and sometimes they are even removed from CRAN/Bioconductor - only using `{renv}` is **not enough** for future reproducibility
     - Alternative to `{renv}` is [`{groundhog}`](https://groundhogr.com/)
-        - *tldr; academics should probably use groundhog, corporate data scientists should arguably use renv.*
+        - *tldr; Academics should probably use groundhog, and corporate data scientists should arguably use renv.*
         - Full comparison of `{renv}` and `{grounhog}` [here](https://groundhogr.com/renv/)
 - Consider using [`{usethis}`](https://usethis.r-lib.org/index.html) for automatization of repetitive tasks and project setup
     - `{usethis}` automates repetitive tasks that arise during project setup and development, both for R packages and non-package projects
 - You should also use *classic* `sessionInfo()` to report the currently loaded packages
     - `sessionInfo() |> report::report()`
-- For RStudio users - use [`.Rproj`](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects) files and combine it with [`{here}`](https://here.r-lib.org/) package
-    - This make your *analysis* directory into *project* directory for better path tracking and setting
+- For RStudio users - use [`.Rproj`](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects) files and combine them with [`{here}`](https://here.r-lib.org/) package
+    - This makes your *analysis* directory into a *project* directory for better path tracking and setting
 - Nice summary of reproducible R development [Building reproducible analytical pipelines with R](https://raps-with-r.dev/)
 
 ## Workflow Managers
 
-- Another step close to full reproducibility is to use workflow managers
+- Another step closer to full reproducibility is to use workflow managers
 - The most used (bioinformatics) workflow managers are [`snakemake`](https://snakemake.readthedocs.io/) and [`nextflow`](https://nextflow.io/)
 - Both `snakemake` and `nextflow` are often based on `conda` environments and Docker/Apptainer images, so the same rules as in [`conda`](#conda) apply here as well
 
 ### `snakemake`
 
-- WiP
+WiP
 
 ### `nextflow`
 
-- WiP
+WiP
