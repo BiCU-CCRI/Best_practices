@@ -55,7 +55,7 @@
     - It gets easier with time, but it needs a lot of discipline at the beginning​
     - After a few CRs, it becomes a habit, and then it doesn't feel like extra work anymore
 
-#### Unreviewed code
+#### Unreviewed Code
 
 - **Increases the number of errors and bugs**: Without the CR, mistakes are more likely to go unnoticed, leading to more bugs in the code.
 - **Decreases productivity**: More time will be spent fixing issues that could have been caught earlier, slowing down the development process.
@@ -126,7 +126,7 @@
     - Feature doesn't always have to have subtasks
 - You can add new Items later if the Project develops while working on it
 - **Note:** Technically, you create an **Item** in the GitHub Project, and it becomes an **Issue only** once you assign a repository to it (otherwise it stays as a `Draft`)
-- Give your Item names a proper prefix as described in [GitHub Best Practices - Ticket types](./github_best_practices.md##ticket-types)
+- Give your Item names a proper prefix as described in [GitHub Best Practices - Ticket types](./github_best_practices.md#ticket-types)
 
 #### 4. Make a new branch from the `main` or the parent branch
 
@@ -151,6 +151,8 @@
 - If applicable, write tests (end-to-end tests, unit tests) or at least provide instructions on how to test the code and what the output should be - see [Code Testing](./code_testing.md) for more information
 
 #### 7. Create and submit a GitHub Pull Request
+
+<a name="7-create-and-submit-a-github-pull-request"></a>
 
 - PRs can be drafted, reviewed, commented on, deleted, merged, and shared
 - Keep the PR small
@@ -188,7 +190,7 @@
 - Align with the Reviewer if you want to start implementing suggestions while the Review is still in progress for the same reasons as in point no. 7
 - More details about the CR can be found in [GitHub Best Practices/Pull Request Review as a Reviewer](./github_best_practices.md#pull-request-review-as-a-reviewer)
 
-##### How to comment on the PR
+##### How to Comment on the PR
 
 1. **On GitHub as part of the PR** - visible for everyone, traceable, and least personal
 
@@ -226,14 +228,14 @@
     - It can lead to fragmented communication if multiple reviewers are involved
 - **Note:** Document key decisions in the PR comments for both On Teams (DM) and Personal discussion for future references
 
-##### GitHub Comments vs. Suggestions
+##### GitHub Comments vs Suggestions
 
 - **Comments** are general questions or queries on the code, structure, formatting, etc.
 - **Suggestions** are direct *proposals* on how to change the code and what to implement
 - It is best to put even general comments as *code comments* because this is the only way one can react to the comments, track them, and resolve them
 - Some more info [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/commenting-on-a-pull-request), [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/reviewing-proposed-changes-in-a-pull-request) and [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/approving-a-pull-request-with-required-reviews).
 
-##### General comments on PR vs. comments on code
+##### General Comments on PR vs Comments on Code
 
 Commenting on the PR in different tabs triggers different actions. Comments in the `Conversation` tab are considered general comments and do not require the Reviewer's resolution. It is not possible to add an answer to these comments directly (only as another general comment). Comments to the `Files changed` tab must be resolved before the PR merge. These comments allow the Developer (or anybody else) to add a direct reply. Comments in the `Review changes` (as part of the submitted Review) are considered in the same way as in the `Conversation` tab and don't require resolving.
 

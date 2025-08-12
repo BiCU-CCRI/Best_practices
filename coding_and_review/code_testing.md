@@ -21,7 +21,7 @@
 
 ## Tests
 
-### End-to-end Tests
+### End-to-End Tests
 
 - End-to-end tests (E2E) test the **code as a whole**
     - Test if the code overall is functional and produces the expected results
@@ -39,13 +39,13 @@
 - For ongoing **development**, it's better to rely on faster, lower-level tests (like [unit tests](#unit-tests)) because they can identify and localize the problem faster
     - However, unit tests don't test the overall flow of the analysis as E2E tests do
 
-#### End-to-end Tests Framework
+#### End-to-End Tests Framework
 
 - The easiest way to set and evaluate E2E tests is to use the `diff` command between the expected result and the actual result
 - In some cases, you have to sort or otherwise *standardize* the results so they are truly comparable. Since `diff` is text-based, the most common *standardize* is `sort`, `ls`, ...
 - You can also compare the file size, text outputs, etc. - anything that can be run in the test environment (see [Where to run tests](#where-to-run-tests))
 
-### Unit Tests Framework
+### Unit Tests
 
 - Unit tests test individual **functions** or parts of the code
 - In general, it is recommended to structure your code in functions as they can be easily tested and they make the code easier to understand
@@ -118,7 +118,7 @@
     - Add subdirectories based on the tested code
         - The tested code is in `src/bash/bunch_of_functions.sh`, and the actual tests are  in `tests/unit/bash/bunch_of_functions.test.sh`
 
-### Tests input and output
+### Tests Input and Output
 
 - Unit tests' input and output are saved in the unit test **scripts themselves**
 - E2E tests require test input and expected output. The most common structure is:

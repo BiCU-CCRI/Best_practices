@@ -8,7 +8,7 @@ Using GitHub projects allows for a simple export of all the work and is describe
 
 **Note:** Other general and additional information can be found in [GitHub Best Practices](./github_best_practices.md).
 
-## Starting a GitHub project
+## Starting a GitHub Project
 
 There are three possible ways to start your project:
 
@@ -25,7 +25,10 @@ Unfortunately, GitHub Projects works best with an existing project repository. I
 We introduce a *tracking* Issue types (this is different from the code development [Issue Types](./github_best_practices.md#issue-types)):
 
 - `Epic`: A high-level tracking issue for a broader initiative or project. It typically encompasses multiple `Tasks` and serves as an organizational *container* rather than a unit of work. We do not work directly on `Epics`; instead, they help us group related efforts (`Tasks`) and track overall progress. `Epics` are long-lived and may span multiple reporting cycles. For example, `SUNRISE POP Drug screening` is an `Epic` - a general overarching topic for multiple individual `Tasks`.
-- `Task`: A concrete, actionable unit of work, such as an analysis, implementation, or request. Each `Task` should be estimable in terms of priority, effort, and duration, and ideally completable within a reasonable timeframe. `Tasks` are the basis for planning, execution, and reporting to management. They should be clearly scoped and outcome-oriented. For example, `SUNRISE PO Drug screening - patient ABC` is a `Task`-specific analysis. **Note:** Over time, `Task` can become an `Epic` (and the type should be updated).
+- `Task`: A concrete, actionable unit of work, such as an analysis, implementation, or request. Each `Task` should be estimable in terms of priority, effort, and duration, and ideally completable within a reasonable timeframe. `Tasks` are the basis for planning, execution, and reporting to management. They should be clearly scoped and outcome-oriented. For example, `SUNRISE PO Drug screening - patient ABC` is a `Task`-specific analysis. **Note:** Over time, a `Task` can become an `Epic` (and the type should be updated).
+- Example: **Tamina Nanopore deconcatenation** - pipelines for deconcatenation of Nanopore reads based on several different experimental protocols. Each protocol requires a different pipeline. The `Epic` is the general deconcatenation *project*, while `Task` is one specific pipeline for one of the protocols
+    - `Epic` in [BiCU Project Overview](https://github.com/orgs/BiCU-CCRI/projects/2/views/2?visibleFields=%5B%22Title%22%2C%22Assignees%22%2C%22Type%22%2C%22Status%22%2C65520046%2C%22Reviewers%22%2C65520044%2C65520045%2C65520047%2C65520048%5D&pane=issue&itemId=101281463&issue=BiCU-CCRI%7Cjo003_tamina_cfdna_nanopore%7C2) and in the [Repository](https://github.com/BiCU-CCRI/jo003_tamina_cfdna_nanopore/issues/2)
+    - `Task` (one of many) in [BiCU Project Overview](https://github.com/orgs/BiCU-CCRI/projects/2/views/1?pane=issue&itemId=122800398&issue=BiCU-CCRI%7Cjo003_tamina_cfdna_nanopore%7C20) and in the [Repository](https://github.com/BiCU-CCRI/jo003_tamina_cfdna_nanopore/issues/20)
 
 When you start working on a new project/request, please follow these instructions:
 
@@ -40,11 +43,9 @@ When you start working on a new project/request, please follow these instruction
 7. Under `Type`, select `Epic`. This will make it obvious that this is the general tracking task. This creates one common tracking task for the whole `POP drug screening` project, which stays around as long as the main project is active.
 8. Edit the description field and add:
 
-"`shell
-
+```shell
 - [ ] POP drug screening - AML sample 1
 - [ ] POP drug screening - MDS sample 1
-
 ```
 
 9. Click on the three small dots next to the created `- [ ]` lines and `Convert to sub-issue`
@@ -58,7 +59,7 @@ When you start working on a new project/request, please follow these instruction
 
 **Note:** You can also do steps 8-10 from the repository `Issues` tab directly - create an Issue in the repository, tag it as `Task`, in `Relationships` (on the right) select the parent `Epic`, and assign the Issue to the `BiCU Projects Overview` project.
 
-## Setting up a GitHub repository
+## Setting Up a GitHub Repository
 
 To set up a repository:
 
@@ -86,11 +87,11 @@ We follow these general rules and settings when creating a new GitHub repository
 2. **PR to the `main` branch has to be reviewed:** (and approved) by **another person** before merging. The PR merge needs to undergo the full CR process and, ultimately, be approved by at least one more person. Only then can it be merged into the `main` (or parent) branch
 3. **All threads need to be resolved:** The reviewer needs to resolve all the CR comments and suggestions before the merge is allowed. The developer **must not resolve:** the comments themselves. If the original reviewer is not available anymore, the developer must request an additional reviewer. **Note:** GitHub suggestions are resolved automatically if accepted as suggested by the reviewer.
 4. **Not implemented** ~~**Branch names and commit messages** need to follow a **specific structure**~~Branch names and commit messages must have a specific structure. This makes it easier to standardize and read the Git history.
-5. **Squashing commits before the merge:** It is strongly encouraged that branch commits should be squashed before the merge. This keeps the `main` (or the parent) branch history nice and tidy (=one commit per merge) while keeping the full history in the original branch. **Note:** This assumes we do not delete the *original merged* branch. [https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests)
+5. **Squashing commits before the merge:** It is strongly **encouraged** that branch commits should be squashed before the merge. This keeps the `main` (or the parent) branch history nice and tidy (=one commit per merge) while keeping the full history in the original branch. **Note:** This assumes we do not delete the *original merged* branch. [https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests). **Note:** This can be enforced in General GitHub Repository settings in the `Pull Requests` section or in *`Settings`->`Rules`->`Ruleset`->`Require a pull request before merging`->`Show additional settings`->`Allowed merge methods`*
 6. **The final merge has to be done by the author:** Once the whole CR process is over, the author has to do the final PR merge. **Note:** This is not enforceable in GitHub Rules, but we can still follow this rule internally.
 7. **Agree on merge and rebase order:** If multiple people contribute to the same code, rebase your local branches to the latest merged PR changes if the other person merges their code first. **Talk to each other** and **decide** who merges first and who rebases, or if the other person should wait before starting a new branch.
 
-#### Branch rulesets
+#### Branch Rulesets
 
 Branch rulesets allow us to enforce specific *rules* for branch names, commit message structures, and the type of commits themselves, and, for example, protect the code from accidental non-unreviewed changes.
 
@@ -98,55 +99,20 @@ Branch rulesets are applicable to all branches; however, the most important are 
 
 More information about individual [rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets), and [GitHub branch protection rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule) or [settings](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches#about-branch-protection-settings).
 
-##### `main` branch protection rules
+##### Shared Repository `main` Branch Protection Rules
 
-We use the following rules to protect the `main` branch:
+**Note:** These rules apply only to the **shared** repositories. For personal/private repositories, use [General (Personal) Repository `main` Branch Protection Rules](#general-personal-repository-main-branch-protection-rules).
 
-- Deleting the branch is disallowed (from git)
-- All the commits must be done through a Pull request (=no direct `git push`)
-- `git push -f` is not allowed
-- Merges are allowed only after an approved and reviewed PR
-- The PR has to be approved by at least one reviewer
-    - If the requested reviewer isn't available, it has to be approved by somebody else, but not any of the PR contributors (except when contributing through GitHub PR suggestions)
-- Require review by at least one person other than the author
-- The reviewer cannot be a person who contributed code to the PR (except when contributing through GitHub PR suggestions)
-- All reviewers' comments must be resolved before the merge
-- The branch commits are squashed before the merge (squashing *merges* all commits in the branch to one commit to `main`, making the history linear)
+**Note:** The following ruleset is also included in [BiCU_shared_repository_template](https://github.com/BiCU-CCRI/BiCU_shared_repository_template).
 
-###### `main` branch rules setup
+To set shared repository `main` branch protection rules, add this to the Rulesets by accessing: `Repository`->`Settings`->`Rules`->`Rulesets`->`New ruleset`->`New branch ruleset`:
 
-To set the rules to protect the `main` branch:
-
-**Note:** Steps 7-11 are only for shared reviewed repositories. For other repository types, continue from step 12.
-
-1. Go to the GitHub Repository
-2. Click on `Settings` on the top panel (below the Repository name)
-3. Click on `Branches` on the left (under `Code and automation`)
-4. Click on `Add classic branch protection rule`
-5. Branch name pattern: `main` or `main*` (or `master` if you haven't switched yet to the [new naming](https://github.com/github/renaming))
-6. `Require a pull request before merging`: **check**
-7. `Require approvals`: **check**
-8. `Required number of approvals before merging`: `1`
-9. `Dismiss stale pull request approvals when new commits are pushed`: **check**
-10. `Require approval of the most recent reviewable push`: **check**
-11. Require conversation resolution before merging: **check**
-12. `Require linear history`: **check** (requires either `squash before merging` or `rebase before merging, but the requirement of'squash before merging` cannot be directly enforced)
-13. `Do not allow bypassing the above settings`: **check**
-14. (**optional**) `Restrict who can push to matching branches`: **check** and specify the people allowed to push and merge to the repository
-15. Click `Create`
-
-#### General branch protection rules
-
-The full branch protection ruleset settings, allowing more fine-tuned restrictions, can be accessed by:
-
-`Repository -> Settings -> Rules -> Rulesets -> New ruleset -> New branch ruleset`
-
-- `Ruleset Name`: `Branch protection`
+- `Ruleset Name`: `main_branch_protection`
 - `Enforcement status`: `Active`
 - `Bypass list`: keep the `Bypass list is empty`
-- `Target branches -> Add target`: `Include all branches` (or you can select specific branches you want to protect, including the `main`/default branch)
+- `Target branches`->`Add target`: `Include default branch`, `Include by pattern`: `main*`, `Include by pattern`: `master*` (or `Add target`->`Include all branches`)
 - Rules:
-    - (**optional**) `Restrict deletions`: **check** (recommended to prevent accidental branch deletions directly from `git`)
+    - `Restrict deletions`: **check** (only for `main`/default branches)
     - `Require linear history`: **check**
     - `Require a pull request before merging`: **check**
         - **Only for shared reviewed repositories:**
@@ -155,22 +121,60 @@ The full branch protection ruleset settings, allowing more fine-tuned restrictio
             - `Require approval of the most recent reviewable push`: **check**
             - `Require conversation resolution before merging`: **check**
         - (optional; not tested) `Automatically request Copilot code review`: **check**
-        - (optional but recommended) `Allowed merge methods` - `Squash`
-    - (not implemented; applicable if [GitHub Actions](#github-actions) are set up) `Require status checks to pass`: **check**
-    - **Only for the main/default branch:**
-        - `Block force pushes`: **check**
-    - **Only with Enterprise license:**
-        - `Restrictions`:
-            - `Restrict commit metadata`: **check**
-                - Must match a given regex pattern and paste commit message regex from [GitHub Best Practices - Commit Message Structure](./github_best_practices.md#commit-message-structure) `^#\d+ [A-Z][a-zA-Z0-9\s]*$` (as of 05.03.2025)
-            - `Restrict branch names`: **check**
-                - Must match a given regex pattern and paste commit message regex from [GitHub Best Practices - Branch Name Structure](./github_best_practices.md#branch-name-structure) `^#\d+ [A-Z][a-zA-Z0-9\s]*$` (as of 05.03.2025)
+        - `Allowed merge methods`: `Squash`
+    - (not implemented; applicable if [Best Coding Practices Guideline/GitHub Actions](./best_coding_practices.md#github-actions) are set up) ~~`Require status checks to pass`: **check**~~
+        - `Block force pushes`: **check** (only for `main`/default branches)
     - `Create`
 
-If we had an **Enterprise license**, we could set additional restrictions to enforce, for example, branch naming, ~~PR title~~ (not supported by GitHub as of Q1 2025), commit message structure to follow regex patterns, ...:
-    - GitHub would then reject commits/branch names that don't follow the pattern
-    - For example, if you don't follow the predefined commit message structure, the `git commit` gets rejected. You can correct the message with `git commit --amend -m '..." and push again with `git push --force`
-    - Setting the rules helps with consistency across the developers and simplifies project and code sharing
+**\*Note:** If we had an **Enterprise license**, we could set additional restrictions to enforce, for example, branch naming, ~~PR title~~ (not supported by GitHub as of Q1 2025), commit message structure to follow regex patterns, ...:
+
+- GitHub would then reject commits/branch names that don't follow the pattern
+- For example, if you don't follow the predefined commit message structure, the `git commit` gets rejected. You can correct the message with `git commit --amend -m '...'` and push again with `git push --force`
+- Setting the rules helps with consistency across the developers and simplifies project and code sharing
+- To set up commit/branch naming requirements:
+    - `Restrictions`:
+        - `Restrict commit metadata`: **check**
+            - Must match a given regex pattern and paste commit message regex from [GitHub Best Practices - Commit Message Structure](./github_best_practices.md#commit-message-structure)
+        - `Restrict branch names`: **check**
+            - Must match a given regex pattern and paste commit message regex from [GitHub Best Practices - Branch Name Structure](./github_best_practices.md#branch-name-structure)
+
+###### Shared Repository `main` Branch Protection Rules using `Branches`->`Add classic branch protection rule`
+
+An alternative way to set up `main` branch protection rules is using `Repository`->`Settings`->`Branches` (under `Code and automation`)->`Add classic branch protection rule` option:
+
+- `Branch name pattern`: `main` or `main*` (or `master` if you haven't switched yet to the [new naming](https://github.com/github/renaming)); **Note:** You can only select one pattern in here
+- `Require a pull request before merging`: **check**
+- `Require approvals`: **check**
+    - `Required number of approvals before merging`: `1`
+    - `Dismiss stale pull request approvals when new commits are pushed`: **check**
+    - `Require approval of the most recent reviewable push`: **check**
+- (not implemented; applicable if [Best Coding Practices Guideline/GitHub Actions](./best_coding_practices.md#github-actions) are set up) `Require status checks to pass before merging`: **check**
+- `Require conversation resolution before merging`: **check**
+- `Require linear history`: **check** (requires either `squash before merging` or `rebase before merging`, but the requirement of `squash before merging` cannot be directly enforced)
+- `Do not allow bypassing the above settings`: **check**
+- (**optional**) `Restrict who can push to matching branches`: **check** and specify the people **allowed** to push and merge to the repository
+- `Create`
+
+#### General (Personal) Repository `main` Branch Protection Rules
+
+**Note:** The following ruleset is also included in [BiCU_personal_repository_template](https://github.com/BiCU-CCRI/BiCU_personal_repository_template).
+
+To set personal/private repository `main` branch protection rules, add this to the Rulesets by accessing: `Repository->Settings->Rules->Rulesets->New ruleset->New branch ruleset`:
+
+- `Ruleset Name`: `main_branch_protection`
+- `Enforcement status`: `Active`
+- `Bypass list`: keep the `Bypass list is empty`
+- `Target branches`->`Add target`: `Default`, `Include by pattern`: `main*`, `Include by pattern`: `master*` (or `Add target`->`Include all branches`)
+- Rules:
+    - `Restrict deletions`: **check** (only for `main`/default branches)
+    - `Require linear history`: **check**
+    - `Require a pull request before merging`: **check**
+            - `Required approvals`: `0`
+        - (optional; not tested) `Automatically request Copilot code review`: **check**
+        - (optional; recommended) `Allowed merge methods`: `Squash`
+    - (not implemented; applicable if [Best Coding Practices Guideline/GitHub Actions](./best_coding_practices.md#github-actions) are set up) `Require status checks to pass`: **check**
+        - `Block force pushes`: **check** (only for `main`/default branches)
+    - `Create`
 
 ## GitHub Project Ticket status
 

@@ -36,7 +36,7 @@
     - [Clean Code for beginners](https://www.freecodecamp.org/news/clean-coding-for-beginners/) and [Clean Code book summary](<https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29>)
         - The actual (for a lot more information) [Clean Code book](https://github.com/jnguyen095/clean-code/blob/master/Clean.Code.A.Handbook.of.Agile.Software.Craftsmanship.pdf)
 
-## Naming Conventions (functions, variables, scripts)
+## Naming Conventions (Functions, Variables, Scripts)
 
 - It is always better to be explicit than implicit
     - Don't expect other people to understand the code the same way as you know it - make it obvious

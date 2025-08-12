@@ -1,6 +1,6 @@
 # GitHub Best Practices Guidelines
 
-## General guidelines
+## General Guidelines
 
 - Don't push your code directly to the default branch (often `main`)
     - The `main` branch should only contain clean, tested, and functional code
@@ -53,7 +53,7 @@
     - **`hotfix`** - tickets with crucial bug fixes that must be implemented ASAP. They can bypass the regular development process. These should be used only if absolutely necessary. Use **`janitor`** or **`bugfix`** for regular code updates, minor improvements, or fixes.
     - **`release`** - ATM, we don't have code releases
 
-##### Merging order
+##### Merging Order
 
 You can decide on what level you want to work and how to structure the *merging* order:
 
@@ -88,7 +88,7 @@ The decision should be based on the Issue *size* and urgency:
 - **Note:** If you want a Subtask (Sub-issue) to be associated with a Project, you have to manually assign it to it
 - Using `feature-` and `subtask-` at the beginning of the Issue/Sub-issue name helps to quickly identify the Issue *type* in the Repository Issues tab and/or in the Repository Project. It also helps to recognize the PR merge *type* if you follow the naming structure from [GitHub Best Practices](./github_best_practices.md#pull-request-title-structure).
 
-#### Issues/ticket status in GitHub Project
+#### Issues/ticket Status in GitHub Project
 
 - GitHub Project offers *status columns*
     - These are useful when we want to fully track the development process (for example, essential for many IT-related ISO certifications) when multiple people collaborate on the same project, or when we want to keep track of where we left off if we have to switch between projects
@@ -225,8 +225,7 @@ The decision should be based on the Issue *size* and urgency:
 - For a Subtask merge, the PR commit message can be a sentence or bullet points summarizing the commits
 - For a Feature merge, the PR commit message can be a list of included Subtasks + the description of the additional commit(s) at the Feature level:
 
-"`git
-
+```git
 - Removes unused dependencies # Commit added at the Feature level
 
 - Includes: # Commits added by merging Subtasks into the Feature
@@ -234,7 +233,6 @@ The decision should be based on the Issue *size* and urgency:
     - [x] subtask-Performance testing framework #3
 
 closes #14
-
 ```
 
 - You can use the following [GitHub keywords](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword) in the **PR commit message** (they won't do anything in the PR comment)
@@ -255,7 +253,7 @@ closes #14
     - `Merge` - add the entire history to the parent branch (including all the commits)
     - **`Squash and merge`** - *summarizes* all the merge code to a single commit and adds this to the parent branch
     - `Rebase and merge` - rewrites the commit history by integrating each of the changes to the parent branch
-- [Squash and merge](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests) is strongly encouraged
+- [`Squash and merge`](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests) is strongly encouraged
     - This keeps the history of the parent branch clean and [**linear**](https://stackoverflow.com/questions/20348629/what-are-the-advantages-of-keeping-linear-history-in-git)
 - You can decide whether you want to **keep** or **delete** the **development** branch after the merge:
     - *Advantage of keeping*: It keeps a detailed history of changes and makes it easier to track the feature development - what was implemented, when, how, and why.
@@ -315,7 +313,7 @@ closes #14
 - You can click on *Viewed* if you went over the file, and you want to hide it temporarily
 - A simple video example [here](https://www.youtube.com/watch?v=lSnbOtw4izI&ab_channel=CoderDave)
 
-#### PR in VS Code plugin
+#### PR in VS Code Plugin
 
 - VS Code has a plugin for [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github) (still under development)
 - You can do **everything** you can do in GitHub without leaving VS Code
@@ -346,7 +344,7 @@ closes #14
 
 ## Notes
 
-### Why not push directly to the `main` branch?
+### Why Not Push Directly to the `main` Branch?
 
 - Prevents non-reviewed, potentially breaking changes
 - The `main` branch is functional until the changes are merged
@@ -359,7 +357,7 @@ closes #14
 
 We protect the `main` branch to ensure we follow the agreed-upon best coding practices and CR.
 
-### Commit message/Branch name/Pull Request title structure
+### Commit Message/Branch Name/Pull Request Title Structure
 
 - We have two (+1) different ways to name commits, branches, and PR merges
     - This comes from the unfortunate GitHub styling of `#<issue number>`
