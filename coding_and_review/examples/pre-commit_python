@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# This section ensures your locally set pre-commit hooks are executed as well
+if test -e ./.git/hooks/pre-commit; then
+    bash ./.git/hooks/pre-commit
+fi
+
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+# Source conda unless we have the formatters installed system-wide
+if [ -z "${CONDA_PREFIX_1+x}" ]; then
+    source "${CONDA_PREFIX}/etc/profile.d/conda.sh"
+else
+    source "${CONDA_PREFIX_1}/etc/profile.d/conda.sh" # Source base environment if within another conda environment
+fi
+
+# Find all staged .py files (before commit)
+python_files=$(git diff --cached --name-only --diff-filter=ACMR "*.py")
+
+# Do NOT quote $python_files here
+if [ -n "$python_files" ]; then
+    if ! command_exists black; then
+        echo "black is not installed, skipping"
+    else
+        # shellcheck disable=SC2086
+        black $python_files
+        # shellcheck disable=SC2086
+        git add $python_files
+    fi
+    if ! command_exists isort; then
+        echo "isort is not installed, skipping"
+    else
+        # shellcheck disable=SC2086
+        isort $python_files
+        # shellcheck disable=SC2086
+        git add $python_files
+    fi
+fi

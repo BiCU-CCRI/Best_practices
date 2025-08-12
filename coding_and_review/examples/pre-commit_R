@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# This section ensures your locally set pre-commit hooks are executed as well
+if test -e ./.git/hooks/pre-commit; then
+    bash ./.git/hooks/pre-commit
+fi
+
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+# Source conda unless we have the formatters installed system-wide
+if [ -z "${CONDA_PREFIX_1+x}" ]; then
+    source "${CONDA_PREFIX}/etc/profile.d/conda.sh"
+else
+    source "${CONDA_PREFIX_1}/etc/profile.d/conda.sh" # Source base environment if within another conda environment
+fi
+
+# Find all staged .R and .r files (before commit)
+r_files=$(git diff --cached --name-only --diff-filter=ACMR | grep -e '\.R$' -e '\.r$')
+
+# Do NOT quote $r_files here
+if [ -n "$r_files" ]; then
+    if ! command_exists air; then
+        echo "air is not installed, skipping"
+    else
+        echo "Checking and reformatting $r_files"
+        # shellcheck disable=SC2086
+        air format --no-color $r_files
+        # shellcheck disable=SC2086
+        git add $r_files
+    fi
+fi
