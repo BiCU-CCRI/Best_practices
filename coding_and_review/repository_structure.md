@@ -106,6 +106,7 @@
 - If our pipelines are based on Docker/Apptainer images, where each command (or step) uses a single image, we can use a single shared directory
 - We don't have to build an image from scratch, as there are multiple hubs from which we can download pre-compiled images:
     - [seqera.io](https://seqera.io/containers/): Build your own images from PyPI, bioconda, and conda-forge
+   	    - **Note:** This might only be used as part of NF pipelines
     - [biocontainers](https://quay.io/organization/biocontainers) ([homepage](https://biocontainers.pro/registry) and [GitHub page](https://github.com/BioContainers/containers)): Prebuilt images; Contains all available conda packages as images and other bioinformatics tools images
     - Also available on [Dockerhub](https://hub.docker.com/u/biocontainers)
     - [Galaxy project](https://depot.galaxyproject.org/singularity/) - Prebuilt images

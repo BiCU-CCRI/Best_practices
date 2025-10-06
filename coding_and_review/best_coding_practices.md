@@ -241,6 +241,63 @@ To autoformat R code **before** (=pre) `git commit`, you can put the example [R 
 
 Following the [Python](#python-code-formatting-git-pre-commit-hook) and [R formatting](#r-code-formatting-git-pre-commit-hook) instructions above, you can do the [same thing for `snakemake`](./examples/pre-commit_snakemake) with `snakefmt`.
 
+### Running Tests as `git pre-push` Hook
+
+If you want to run local tests and prevent pushing if the tests fail, enable global pre-push hooks to run local pre-push rules as well.
+
+Add to`/home/${USER}/.git/hooks/pre-push`  (or create if doesn't exist)  so it also contains:
+```bash
+#!/bin/bash
+set -euo pipefail
+
+# This section ensures your locally set pre-push hooks are executed as well
+if test -e ./.git/hooks/pre-push; then
+    bash ./.git/hooks/pre-push
+fi
+```
+
+If you created a new file, don't forget to give it execute permissions:
+
+```bash
+chmod +x /home/${USER}/.git/hooks/pre-push
+```
+
+Then, you can locally (in the git repository, `./.git/hooks/pre-push`) have local pre-push rules that runs tests:
+
+```bash
+#!/bin/bash
+
+set -euo pipefail
+
+echo "Running e2e and unit tests before push..."
+
+# Workflow tests
+if [ -f workflow/tests/run_tests.sh ]; then
+    bash workflow/tests/run_tests.sh
+
+    if [ $? -ne 0 ]; then
+        echo "Workflow tests failed. Push aborted."
+        exit 1
+    fi
+
+    echo "Workflow tests passed. Proceeding with push."
+fi
+
+# Other tests
+if [ -f tests/run_tests.sh ]; then
+    bash tests/run_tests.sh
+
+    if [ $? -ne 0 ]; then
+        echo "Other tests failed. Push aborted."
+        exit 1
+    fi
+
+    echo "Other tests passed. Proceeding with push."
+fi
+
+exit 0
+```
+
 ### `shell` Code Formatting Upon Save
 
 - To format shell code automatically with every file save in VS Code, you can do the following:
