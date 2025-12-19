@@ -86,6 +86,7 @@
 ### Docker
 
 - We follow [Docker Best practices](https://docs.docker.com/build/building/best-practices/)
+    - Some more relevant tips are also available at [Day 20: Master Dockerfile Best Practices: How to Build Lightweight, Efficient Docker Images](https://medium.com/devsecops-community/master-dockerfile-best-practices-how-to-build-lightweight-efficient-docker-images-0f9b770fe745)
 
 ## Code Formatters and Linters
 
@@ -246,6 +247,7 @@ Following the [Python](#python-code-formatting-git-pre-commit-hook) and [R forma
 If you want to run local tests and prevent pushing if the tests fail, enable global pre-push hooks to run local pre-push rules as well.
 
 Add to`/home/${USER}/.git/hooks/pre-push`  (or create if doesn't exist)  so it also contains:
+
 ```bash
 #!/bin/bash
 set -euo pipefail

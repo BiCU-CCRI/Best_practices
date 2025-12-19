@@ -70,23 +70,23 @@
 
 ## Shared resources
 
+- For most up to date information about the structure of shared resources, please visit [shared_resources](../shared_resources/README.md)
+	- Here, we only summarize the overall architecture
+
 ### References, Indexes, and Databases
 
 - Unified references and database directory structure help with code readability, shareability, and transferability
 
 #### References Structure
 
-- For should use the Latin name for the organisms unless agreed otherwise
-- Use: `<organism_latin_name>/<genome_version>/<source_database_and_version>/<reference_file>`
-    - For example: `homo_sapiens/hg38/UCSC/genome.fa`
-- **Note:** Not all databases have to have `...and_version>`
+- Use the **Latin name** for the organisms unless agreed otherwise
 - Keep the original file name and link it to a *simple* final file name
     - For example, for human reference based on UCSC `hg38`, make `homo_sapiens/hg38/UCSC` directory, download the original file from [UCSC](https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz) to `homo_sapiens/hg38/UCSC/` and (optionally) soft-link it to the final `genome.fa.gz`
     - The directory then contains the original downloaded file name (`hg38.fa.gz`) and the final reference name to use in the analysis, `genome.fa.gz`
 - For annotations, use the same structure
-    - For example, download mouse gene annotation from [Ensembl]([Mus_musculus.GRCm39.113.gtf.gz](https://ftp.ensembl.org/pub/release-113/gtf/mus_musculus/Mus_musculus.GRCm39.113.gtf.gz)) to `mus_musculus/GRCm39/ensembl_v113` directory and (optionally) soft-link it (within the same directory) to the final `genes.gtf.gz`
+    - For example, download mouse gene annotation from [Ensembl]([Mus_musculus.GRCm39.113.gtf.gz](https://ftp.ensembl.org/pub/release-113/gtf/mus_musculus/Mus_musculus.GRCm39.113.gtf.gz)) to `Mus_musculus/GRCm39/Ensembl/v113` directory and (optionally) soft-link it (within the same directory) to the final `genes.gtf.gz`
 - Don't forget to keep track of where you downloaded the references, when, and if you did any postprocessing (including the soft-linking) in, for example, the `run.sh` script within the references directory
-- Optional: You can use references metadata (for example, `YAML`) to store all the information (organism, version, database, link, final file name, date, ...) and parse it automatically (for example, with `yq`)
+- Optional: You can use reference metadata (for example, `YAML`) to store all the information (organism, version, database, link, final file name, date, ...) and parse it automatically (for example, with `yq`)
 
 ##### Indexes
 

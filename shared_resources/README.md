@@ -1,19 +1,20 @@
 # Shared resources
 
-Structure and recommendations for shared resources at the cluster(s). Primarily focused on newly established shared resources at the CeMM cluster but can be applied anywhere.
+Structure and recommendations for shared resources at the cluster(s). Primarily focused on newly established shared resources at the CeMM cluster, but can be applied anywhere.
 
 - `run.sh`: information on where to get the references (databases, images, etc.) from and how to build them. It contains details on *rebuilding* resources if necessary and can be stored on `GitHub`. This is the most critical resource if we have to build the references from scratch or share them externally.
-- `README.md`: information (verbal) about the references (databases, images, etc.). Used to describe the resources and can be stored on `GitHub`. For example, it can contain information about why a particular reference was chosen over another, the differences, which reference to use as the *default*, etc.
+- `README.md`: information (verbal) about the references (databases, images, etc.). Used to describe the resources and can be stored on `GitHub`. For example, it can contain information about why a particular reference was chosen over another, the differences between them, and which reference to use as the *default*, etc.
 
 Shared resources at the CeMM cluster are at `/nobackup/lab_ccri_bicu/public`.
 
-## References
+## References and indexes
 
 - **Source link** of the references must be included in the `run.sh`
 - All the processing instructions to build the reference (if applicable) must be included in the `run.sh`
-- **Steps to obtain the reference** that **cannot** to be described as a *command* must be included in the `run.sh` or `README.md` (for example, some UCSC Genome Browser references)
-- Note: If you are copying legacy reference from the CCRI storage, note the original location and the date when you copied the reference
-    - For example, *Copied from Isilion on Jan 02, 2024: `/home/jan_o/bioinf_isilon/core_bioinformatics_unit/Public/references/Human_GRCh38_v102/Homo_sapiens_GRCh38_v102_star_index_150bp` -> `./STAR_2.7.10a/index_150bp`*
+- **Steps to obtain or construct the reference** (for example, genome index for mapping tool) should included in the `run.sh` or `README.md`, including the used image/tool version
+   	- **Steps to obtain the reference** that **cannot** to be described as a *command* must be included in the `run.sh` or `README.md` (for example, some UCSC Genome Browser references)
+- **Note:** If you are copying a legacy reference from the CCRI storage, note the original location and the date when you copied the reference
+    - For example, *Copied from Isilion on Jan 02, 2024: `/home/jan_o/bioinf_isilon/core_bioinformatics_unit/Public/references/Human_GRCh38_v102/Homo_sapiens_GRCh38_v102_star_index_150bp` -> `./STAR/v2.7.10a/index_150bp`*
 - Downloading of a reference should include **the download date**
     - For example, *`Downloaded on Apr 17, 2025, from https://genome.ucsc.edu/cgi-bin/hgTables`*
 - It should be possible to identify the specific reference **release** either from the directory structure or from the file name
@@ -25,13 +26,13 @@ Shared resources at the CeMM cluster are at `/nobackup/lab_ccri_bicu/public`.
   `ln -s Homo_sapiens.GRCh38.dna.toplevel.fa genome.fa`)
     - *Generic* reference name makes it easy to switch between versions/organisms
         - For example, `Homo_sapiens/GRCh38/Ensembl/v102/genome.fa` vs. `Mus_musculus/GRCm38/Ensembl/v102/genome.fa`
-- **Steps to construct the reference** (for example, genome index for mapping tool) should included in the `run.sh` or `README.md`, including the used image/tool version
+- Only create **subdirectories** if your reference is **very pipeline-/analysis-specific** and it doesn't have any use for other users
 - The **tool version** used to construct the reference (for example, genome index for mapping tool) should be included **in the reference name** (for example, `Homo_sapiens/GRCh38/Ensembl/v102/STAR/v2.7.10a`)
 - **Parameters** used to construct the reference that is not set by default should be included **in the reference name**
-    - For example, a `STAR` index with `150` read length settings would be `Homo_sapiens/GRCh38/Ensembl/v102/STAR_v2.7.10a/index_150bp`
+    - For example, a `STAR` index with `150` read length settings would be `Homo_sapiens/GRCh38/Ensembl/v102/STAR/v2.7.10a/index_150bp`
+    - If the specific changed setting is not *obvious*, include the parameter name in the index name in addition to the value
 - **Use Latin names** for organisms where possible
     - If you must use *common* names, softlink them from Latin names (for example, `ln -s Homo_sapiens human`), but it is generally not recommended
-- Only create **subdirectories** if your reference is **very pipeline-/analysis-specific** and it doesn't have any use for other users
 
 ### Directory structure for references, databases, and other resources
 
@@ -73,7 +74,7 @@ databases
 
 #### Directory structure for other resources
 
-Resources might have different structures from references and databases as they are often not well defined, but try to keep the structure as similar as possible.
+Resources may have different structures from references and databases, as they are often not well-defined; however try to keep the structure as similar as possible.
 
 For example, [target `BED`](https://www.twistbioscience.com/sites/default/files/resources/2022-12/hg38_exome_v2.0.2_targets_sorted_validated.re_annotated.bed) files for [Twist Exome 2.0](https://www.twistbioscience.com/products/ngs/fixed-panels/exome2),
 
