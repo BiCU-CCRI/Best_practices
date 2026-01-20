@@ -3,7 +3,7 @@
 Structure and recommendations for shared resources at the cluster(s). Primarily focused on newly established shared resources at the CeMM cluster, but can be applied anywhere.
 
 - `run.sh`: information on where to get the references (databases, images, etc.) from and how to build them. It contains details on *rebuilding* resources if necessary and can be stored on `GitHub`. This is the most critical resource if we have to build the references from scratch or share them externally.
-- `README.md`: information (verbal) about the references (databases, images, etc.). Used to describe the resources and can be stored on `GitHub`. For example, it can contain information about why a particular reference was chosen over another, the differences between them, and which reference to use as the *default*, etc.
+- `README.md`: information (verbal) about the references (databases, images, etc.). Used to describe the resources that can be stored on GitHub. For example, it can contain information about why a particular reference was chosen over another, the differences between them, and which reference to use as the *default*, etc.
 
 Shared resources at the CeMM cluster are at `/nobackup/lab_ccri_bicu/public`.
 
@@ -11,8 +11,8 @@ Shared resources at the CeMM cluster are at `/nobackup/lab_ccri_bicu/public`.
 
 - **Source link** of the references must be included in the `run.sh`
 - All the processing instructions to build the reference (if applicable) must be included in the `run.sh`
-- **Steps to obtain or construct the reference** (for example, genome index for mapping tool) should included in the `run.sh` or `README.md`, including the used image/tool version
-   	- **Steps to obtain the reference** that **cannot** to be described as a *command* must be included in the `run.sh` or `README.md` (for example, some UCSC Genome Browser references)
+- **Steps to obtain or construct the reference** (for example, genome index for mapping tool) should be included in the `run.sh` or `README.md`, including the used image/tool version
+    - **Steps to obtain the reference** that **cannot** to be described as a *command* must be included in the `run.sh` or `README.md` (for example, some UCSC Genome Browser references)
 - **Note:** If you are copying a legacy reference from the CCRI storage, note the original location and the date when you copied the reference
     - For example, *Copied from Isilion on Jan 02, 2024: `/home/jan_o/bioinf_isilon/core_bioinformatics_unit/Public/references/Human_GRCh38_v102/Homo_sapiens_GRCh38_v102_star_index_150bp` -> `./STAR/v2.7.10a/index_150bp`*
 - Downloading of a reference should include **the download date**
@@ -74,7 +74,7 @@ databases
 
 #### Directory structure for other resources
 
-Resources may have different structures from references and databases, as they are often not well-defined; however try to keep the structure as similar as possible.
+Resources may have different structures from references and databases, as they are often not well-defined; however, try to keep the structure as similar as possible.
 
 For example, [target `BED`](https://www.twistbioscience.com/sites/default/files/resources/2022-12/hg38_exome_v2.0.2_targets_sorted_validated.re_annotated.bed) files for [Twist Exome 2.0](https://www.twistbioscience.com/products/ngs/fixed-panels/exome2),
 
@@ -98,17 +98,18 @@ resources
     - For example, `ucsc-bedclip-377--h0b8a92a_2.sif`
 - **Do not duplicate** images if they are **already exist** in the shared resources
 - **Don't build** an image from scratch if it already exists as a **prebuilt image** - see [Publicly available images](#publicly-available-images) section
-- If you must build a **custom image**, use `ubuntu:22.04` as the base image and always include the `.def.` (or `.Dockerfile)`) with the image
+- If you must build a **custom image**, use `ubuntu:22.04` as the base image and always include the `.def.` (or `Dockerfile`) with the image
     - `apptainer` is preferred due to the compatibility with the CeMM cluster environment
+- Using the **`sha256` digest** (or `git` hash) method is **preferred over the tag** method
+    - For more info see [Best_practices/coding_and_review/code_reproducibility](https://github.com/BiCU-CCRI/Best_practices/blob/15-best-coding-practices-and-code-review/coding_and_review/code_reproducibility.md#base-image)
 - **Include instructions** on how to **build** the image, **including the tool version** (`apptainer`/`singularity`/`docker`) used to build the image
 - Include the **download source link** if you didn't build the container yourself
     - Note: If you are copying the image from the CCRI storage, include the original location and the date when you copied the image (for example, *Copied from Isilion on Jan 02, 2024: `/home/jan_o/bioinf_isilon/core_bioinformatics_unit/Public/singularity_images/minimap2_v2.17.sif` -> `minimap2_v2.17.sif`*)
 - For Apptainer/Singularity images, use the **`.sif`** (Singularity Image Format) suffix
     - Note: Singularity Image Format is the default format since Singularity 3.0+
-- Using the **`sha256` digest** (or `git` hash) method is **preferred over the tag** method
-    - For more info see [Best_practices/coding_and_review/code_reproducibility](https://github.com/BiCU-CCRI/Best_practices/blob/15-best-coding-practices-and-code-review/coding_and_review/code_reproducibility.md#base-image)
 - Create **subdirectories** if your images are **very pipeline-/analysis-specific** and don't have any use for other users or would clash with other already existing images (for example, very similar name)
-- If you need to keep all your images in one subdirectory (for example, you need to mix pipeline-specific images with common images and you don't want to specify separate paths), softlink them from the *main* share directory
+    - `.def`/`Dockerfile` for these types of images should be included in the pipeline/analysis repository and should also be copied to the pipeline images subdirectory
+- If you need to keep all your images in one subdirectory (for example, you need to mix pipeline-specific images with common images and you don't want to specify separate paths), softlink them to the pipeline images subdirectory from the *main* shared directory
 
 ### Directory structure for images
 
@@ -117,7 +118,8 @@ apptainer_images
 ├── README.md
 ├── bcftools-1.20.def
 ├── bcftools-1.20.sif
-├── rnaseq_fusion_pipeline
+├── ucsc-bedclip-377--h0b8a92a_2.sif
+├── rnaseq_fusion_pipeline # Custom images
 │   ├── rnaseq_fusion_report-v2.1.5_mitelman_fix_add_tool_cicero.sif
 │   └── rnaseq_fusion_report-v2.1.5_mitelman_fix_add_tool_cicero.Dockerfile
 └── run.sh
